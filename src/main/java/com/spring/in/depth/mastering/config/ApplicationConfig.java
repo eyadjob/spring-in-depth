@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 
 import java.io.OutputStream;
@@ -21,18 +22,16 @@ public class ApplicationConfig {
     private TimeService timeService;
 
 
-    private String greeting;
-
-    private String name;
-
-    public ApplicationConfig( @Value("${app.greeting}") String greeting, @Value("${app.name}") String name ) {
-        this.greeting = greeting;
-        this.name = name;
+    @Bean
+    @Profile("!dev")
+    public TimeService timeService() {
+        return new TimeService(true);
     }
 
     @Bean
-    public TimeService timeService() {
-        return new TimeService(true);
+    @Profile("dev")
+    public TimeService timeServiceDev() {
+        return new TimeService(false);
     }
 
     @Bean
@@ -45,3 +44,22 @@ public class ApplicationConfig {
         return new GreetingService(greeting);
     }
 }
+
+
+// beans scope :
+// prototype :
+    // new instance every time it is referenced
+//session bean :
+    /// only apply on web application
+    // one instance per session
+    // definition stored in the IOC not the instance, for garbage collection
+// Request scope :
+        // apply only on web application
+        // one instance per request
+        // definition stored in the IOC not the instance, for garbage collection
+
+
+//Proxy :
+
+        // add behavior to a class
+        //private methods can't have proxies
