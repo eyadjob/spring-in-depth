@@ -1,33 +1,18 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+**/debug.log
+.idea/
+**/build/
+**/temp/
+**/customReports/
+**/target/
+**/logs/
+**/ejarautomation-selenium/.idea
+**/.idea
+**/test output
+Projects/Alwefaq/tmp/
+**/Projects/Alwefaq/.classpath
+**/bin
+**/reports
+**/ejarConneted/Libs/Libs
+**/settings/internal/com.kms.katalon.composer.testcase.properties
+/settings/internal/com.kms.katalon.composer.testcase.properties
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
