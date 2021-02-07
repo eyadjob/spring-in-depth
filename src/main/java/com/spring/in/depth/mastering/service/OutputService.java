@@ -3,10 +3,11 @@ package com.spring.in.depth.mastering.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-
+@Service
 public class OutputService {
+
     @Value("${app.name}")
-    private final String name;
+    private String name;
 
     private TimeService timeService;
     private GreetingService greetingService;

@@ -5,8 +5,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GreetingService {
-    @Value("${app.greeting}") String greeting;
+
+    @Value("${app.greeting}")
+    String greeting;
 
     public GreetingService() {
     }
+
+    public String getGreeting() {
+        return this.greeting;
+    }
+
 }
