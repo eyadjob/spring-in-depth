@@ -36,12 +36,12 @@ public class ApplicationConfig {
 
     @Bean
     public OutputService outputService() {
-        return new OutputService(greetingService, timeService,name);
+        return new OutputService(greetingService, timeService);
     }
 
     @Bean
     public GreetingService greetingService() {
-        return new GreetingService(greeting);
+        return new GreetingService();
     }
 }
 
