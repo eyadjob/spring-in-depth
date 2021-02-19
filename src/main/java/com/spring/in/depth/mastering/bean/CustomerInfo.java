@@ -4,9 +4,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.spring.in.depth.mastering.utility.JsonUtility;
 import com.spring.in.depth.mastering.utility.PropManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
-
+@Service
 public class CustomerInfo {
     @Autowired
     JsonUtility jsonUtility;

@@ -1,6 +1,7 @@
 package com.spring.in.depth.mastering.service;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.spring.in.depth.mastering.bean.CustomerInfo;
 import com.spring.in.depth.mastering.utility.JsonUtility;
 import com.spring.in.depth.mastering.utility.PropManager;
 //import org.junit.jupiter.api.DisplayName;
@@ -16,6 +17,8 @@ public class CustomerService {
     @Autowired
     RequestApiService requestApiService;
 
+    @Autowired
+    CustomerInfo customerInfo;
 
     @Autowired
     JsonUtility jsonUtility;
@@ -26,9 +29,14 @@ public class CustomerService {
         HttpHeaders httpHeaders = requestApiService.buildDefaultHeaders();
         HttpEntity<String> httpEntity = requestApiService.buildHttpEntity(PropManager.getInstance().getProperty("api.authenticate.post.payload"), httpHeaders);
         ObjectNode authorizationResponse = requestApiService.requestPostAPI("api.authentication", httpEntity);
-        httpEntity.getHeaders().set("Authorization", "Bearer" + authorizationResponse.get("accessToken").textValue());
-//        httpEntity.
-        ObjectNode createCustomerResponse = requestApiService.requestPostAPI("api.create.customer", httpEntity);
+
+        httpHeaders.addIfAbsent("Authorization", "Bearer" + authorizationResponse.get("result").get("accessToken").textValue());
+        requestApiService.getJsonNodeValue(authorizationResponse,"result","accessToken");
+        HttpEntity<String> countryInfoEntity = requestApiService.buildHttpEntity(httpHeaders);
+        ObjectNode countryInfoResponse = requestApiService.requestGetAPI("api.GetCountryCurrencyInfo", countryInfoEntity,"countryId=1");
+//        customerInfo.getCreateCustomerReadyPayload()
+        HttpEntity<String> createCustomerHttpEntity = requestApiService.buildHttpEntity(PropManager.getInstance().getProperty("api.create.customer.post.payload"), httpHeaders);
+        ObjectNode createCustomerResponse = requestApiService.requestPostAPI("api.create.customer", createCustomerHttpEntity);
 
     }
 }
