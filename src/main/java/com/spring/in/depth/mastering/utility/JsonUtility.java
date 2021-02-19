@@ -3,7 +3,9 @@ package com.spring.in.depth.mastering.utility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.springframework.stereotype.Service;
 
+@Service
 public class JsonUtility {
 
 

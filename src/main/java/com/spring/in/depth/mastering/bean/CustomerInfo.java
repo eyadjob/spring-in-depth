@@ -51,7 +51,7 @@ public class CustomerInfo {
 
         customerPayload.put("primaryPhone", getPhoneNumber());
         customerPayload.put("email", getEmail());
-        customerPayload.put("nationalityId", getNationality);
+//        customerPayload.put("nationalityId", getNationality);
         customerPayload.put("countryId", getFirstName());
         customerPayload.put("cityId", getFirstName());
         customerPayload.put("issueCountryId", getFirstName());
@@ -60,8 +60,7 @@ public class CustomerInfo {
         customerPayload.put("typeName", getFirstName());
         customerPayload.put("issueCountry", getFirstName());
         customerPayload.put("sourceId", getFirstName());
-
-
+        return customerPayload;
     }
 
 }

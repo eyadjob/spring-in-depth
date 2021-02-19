@@ -11,8 +11,8 @@ public class TimeService {
     private static final DateTimeFormatter FORMATTER_24 = DateTimeFormatter.ofPattern("HH:mm:ss");
     private static final DateTimeFormatter FORMATTER_12 = DateTimeFormatter.ofPattern("hh:mm:ss");
     boolean format;
-    @Value("#{new Boolean(environment['spring.profile.active']!=dev))}")
-    private boolean is24;
+//    @Value("#{new Boolean(environment['spring.profile.active']!=dev)}")
+    private boolean is24=false;
 
     public TimeService(boolean format) {
         this.format = format;

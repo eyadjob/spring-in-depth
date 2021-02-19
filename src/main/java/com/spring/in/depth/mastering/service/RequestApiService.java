@@ -6,11 +6,13 @@ import com.spring.in.depth.mastering.utility.PropManager;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 import java.util.Properties;
 
+@Service
 public class RequestApiService {
 
     public static void main(String[] args) {
@@ -34,16 +36,16 @@ public class RequestApiService {
     }
 
     public HttpEntity<String> buildHttpEntity(String jsonPayload, HttpHeaders headers) {
-        String payload = PropManager.getInstance().getProperty("authenticate_post");
-        Object jsonObject = new JsonUtility().getJsonFromString(payload);
-        HttpEntity<String> entity = new HttpEntity<String>(jsonPayload, headers);
+//        String payload = PropManager.getInstance().getProperty("authenticate_post");
+//        Object jsonObject = new JsonUtility().getJsonFromString(payload);
+        HttpEntity<String> entity = new HttpEntity<>(jsonPayload, headers);
         return entity;
 
     }
 
     public ObjectNode requestPostAPI(String apiNameKey,HttpEntity<String> httpEntity) {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.postForEntity(PropManager.getInstance().getLocatorName("env.url") + PropManager.getInstance().getProperty(apiNameKey), httpEntity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity(PropManager.getInstance().getProperty("env.url") + PropManager.getInstance().getProperty(apiNameKey), httpEntity, String.class);
         ObjectNode objectNode = new JsonUtility().getObjectNodFromString(response.getBody());
         System.out.println("test");
         return objectNode;

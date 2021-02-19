@@ -1,8 +1,6 @@
 package com.spring.in.depth.mastering;
 
-import com.spring.in.depth.mastering.config.ApplicationConfig;
-import com.spring.in.depth.mastering.service.OutputService;
-import org.apache.catalina.core.ApplicationContext;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -23,18 +21,6 @@ public class MasteringApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MasteringApplication.class, args);
-
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-		OutputService outputService = context.getBean(OutputService.class);
-
-		for (int i =0; i < 5; i++) {
-			System.out.println(outputService.generateOutput());
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 }
