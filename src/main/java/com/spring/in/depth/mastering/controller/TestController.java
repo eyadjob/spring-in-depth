@@ -15,6 +15,8 @@ public class TestController {
 
     @RequestMapping(path = "/CreateCustomer/", method = RequestMethod.GET)
     public void getTest( ) {
+
+
         customerService.createNewCustomer();
     }
 

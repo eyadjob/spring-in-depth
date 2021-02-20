@@ -2,6 +2,8 @@ package com.spring.in.depth.mastering.service;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.spring.in.depth.mastering.bean.CustomerInfo;
+import com.spring.in.depth.mastering.repository.ejar.stg.EjarCommonRepository;
+import com.spring.in.depth.mastering.repository.ejar.stg.EjarCountryRepository;
 import com.spring.in.depth.mastering.utility.JsonUtility;
 import com.spring.in.depth.mastering.utility.PropManager;
 //import org.junit.jupiter.api.DisplayName;
@@ -23,9 +25,19 @@ public class CustomerService {
     @Autowired
     JsonUtility jsonUtility;
 
+    @Autowired
+    EjarCommonRepository ejarCommonRepository;
+
+    @Autowired
+    EjarCountryRepository ejarCountryRepository;
+
 //    @Test
 //    @DisplayName("Create new customer with unique name and identity")
     public void createNewCustomer() {
+//        ejarCommonRepository.getCountryInfoBasedOnCountryName("Saudi");
+        ejarCountryRepository.getCountryLikeName("Saudi");
+        ejarCountryRepository.getCountryById(1);
+
         HttpHeaders httpHeaders = requestApiService.buildDefaultHeaders();
         HttpEntity<String> httpEntity = requestApiService.buildHttpEntity(PropManager.getInstance().getProperty("api.authenticate.post.payload"), httpHeaders);
         ObjectNode authorizationResponse = requestApiService.requestPostAPI("api.authentication", httpEntity);

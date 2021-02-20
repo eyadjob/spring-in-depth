@@ -12,11 +12,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableAsync
-@SpringBootApplication(exclude = {
-		DataSourceAutoConfiguration.class,
-		DataSourceTransactionManagerAutoConfiguration.class,
-		HibernateJpaAutoConfiguration.class
-})
+@SpringBootApplication()
 public class MasteringApplication {
 
 	public static void main(String[] args) {
@@ -24,3 +20,8 @@ public class MasteringApplication {
 	}
 
 }
+//exclude = {
+//		DataSourceAutoConfiguration.class,
+//		DataSourceTransactionManagerAutoConfiguration.class,
+//		HibernateJpaAutoConfiguration.class
+//}
