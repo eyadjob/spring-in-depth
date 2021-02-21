@@ -25,7 +25,7 @@ public class EjarCommonRepository {
             try {
                 PreparedStatement ps = ejarDataSource.getConnection().prepareStatement(query) ;
                 ResultSet rs = ps.executeQuery();
-                System.out.println(rs.getString("countryId"));
+                System.out.println(rs.getString("id"));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -33,8 +33,7 @@ public class EjarCommonRepository {
     }
 
     public String getCountryInfoBasedOnCountryName(String countryName) {
-        String[] columns = {"Id", "BranchId", "VoucherId", "Amount", "CreateDate", "CreatedBy", "LastUpdatedDate", "LastUpdatedBy", "ReferenceId", "ReferenceType", "VoucherType", "CreatedBranchID"};
-        String query = "SELECT * FROM eJarDBTEM.CRM.COUNTRIES WHERE name LIKE '%" + countryName + "%'";
+        String query = "SELECT * FROM CRM.Countries WHERE name LIKE '%" + countryName + "%'";
         executeQuery(query);
         return "test";
     }
