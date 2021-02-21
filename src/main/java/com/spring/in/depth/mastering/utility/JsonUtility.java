@@ -4,8 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.github.wnameless.json.flattener.JsonFlattener;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class JsonUtility {
@@ -61,5 +65,11 @@ public class JsonUtility {
 
             }
         return nodeValue;
+    }
+
+    public Map<Object,Object> getFlattenJson(String jsonPlayload) {
+        Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(jsonPlayload);
+        Map<Object, Object> result = flattenJson.entrySet().stream().collect(Collectors.toMap(d -> d.getKey(), d -> d.getValue()));
+        return result;
     }
 }

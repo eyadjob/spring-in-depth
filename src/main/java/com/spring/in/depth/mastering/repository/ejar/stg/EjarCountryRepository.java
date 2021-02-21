@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface EjarCountryRepository extends JpaRepository<EjarCountryEntity, Long> {
 
-    @Query(value = "SELECT id FROM CRM.Countries WHERE name LIKE %:countryName%", nativeQuery = true)
+    @Query(value = "SELECT * FROM CRM.Countries WHERE name LIKE %:countryName%", nativeQuery = true)
     List<EjarCountryEntity> getCountryLikeName(@Param("countryName") String countryName);
 
     @Query(value = "SELECT id FROM CRM.Countries WHERE id = :countryId", nativeQuery = true)

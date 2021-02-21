@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.spring.in.depth.mastering.utility.JsonUtility;
 import com.spring.in.depth.mastering.utility.PropManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +28,7 @@ public class CustomerService {
     @Autowired
     ApisData apisData;
 
-    private String customerNumber;
+    private final String customerNumber;
 
     public CustomerService() {
         String currentTime = String.valueOf(new Date().getTime());
@@ -59,9 +58,10 @@ public class CustomerService {
     }
 
     public ObjectNode getCreateCustomerReadyPayload(ApisData apisData) {
+
         ObjectNode customerPayload = jsonUtility.getObjectNodFromString(PropManager.getInstance().getProperty("api.create.customer.post.payload"));
-        customerPayload.put("first", getFirstName());
-        customerPayload.put("second", getSecondName());
+        ((ObjectNode) customerPayload.get("customer").get("fullName")).put("first", getFirstName());
+        ((ObjectNode) customerPayload.get("customer").get("fullName")).put("second", getSecondName());
         customerPayload.put("family", getLastName());
         customerPayload.put("primaryPhone", getPhoneNumber());
         customerPayload.put("email", getEmail());
