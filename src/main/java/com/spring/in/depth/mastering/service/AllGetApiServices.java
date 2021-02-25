@@ -27,7 +27,7 @@ public class AllGetApiServices {
         List<EjarCountryEntity> ejarCountryEntityList = ejarCountryRepository.getCountryLikeName(PropManager.getInstance().getProperty("country.name"));
         apisData.getValuesCache().put("countryId",String.valueOf(ejarCountryEntityList.get(0).getId()));
         apisData.getValuesCache().put("currencyId",String.valueOf(ejarCountryEntityList.get(0).getCurrencyId()));
-        apisData.getValuesCache().put("countryName",String.valueOf(ejarCountryEntityList.get(0).getCountryName()));
+        apisData.getValuesCache().put("countryName",ejarCountryEntityList.get(0).getCountryNameBasedOnLang());
         return apisData;
     }
 

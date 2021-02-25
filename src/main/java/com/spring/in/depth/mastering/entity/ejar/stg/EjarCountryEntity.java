@@ -1,5 +1,7 @@
 package com.spring.in.depth.mastering.entity.ejar.stg;
 
+import com.spring.in.depth.mastering.utility.PropManager;
+import com.spring.in.depth.mastering.utility.RegxUtility;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,5 +21,9 @@ public class EjarCountryEntity {
 
     @Column(name = EjarColumnsName.CURRENCY_ID)
     private int currencyId;
+
+    public String getCountryNameBasedOnLang() {
+        return RegxUtility.getRegxMatch("\""+PropManager.getInstance().getProperty("execution.lang")+"\":\"(.*?)\"",1,countryName);
+    }
 
 }

@@ -9,6 +9,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class EjarAuthenticationService {
 
@@ -24,11 +26,14 @@ public class EjarAuthenticationService {
     @Autowired
     JsonUtility jsonUtility;
 
-    public ResponseEntity<String> authenticateUser(String userName, String password) {
+    public void authenticateUser(String userName, String password) {
         HttpEntity<String> httpEntity = apisDataEntity.getHttpEntity(jsonUtility.setNodesValuesAndGetJsonString(PropManager.getInstance().getProperty("api.authenticate.post.payload"), "userNameOrEmailAddress:" + userName, "password:" + password));
         ResponseEntity<String> response = requestApiService.requestPostAPI("api.authentication", httpEntity );
         ObjectNode authResponse = jsonUtility.getObjectNodFromString(response.getBody());
-        apisDataEntity.getDefaultHeaders().addIfAbsent("Authorization", "Bearer" + authResponse.get("result").get("accessToken").textValue());
-        return response;
+        apisDataEntity.getDefaultHeaders().addIfAbsent("Authorization","Bearer " + authResponse.get("result").get("accessToken").textValue());
+//        if (apisDataEntity.getDefaultHeaders().get("Authorization") == null ) {
+//            apisDataEntity.getDefaultHeaders().add("Authorization","Bearer " + authResponse.get("result").get("accessToken").textValue());
+//        } else
+//            apisDataEntity.getDefaultHeaders().replace("Authorization",new ArrayList<>(){{add("Bearer " + authResponse.get("result").get("accessToken").textValue());}});
     }
 }
