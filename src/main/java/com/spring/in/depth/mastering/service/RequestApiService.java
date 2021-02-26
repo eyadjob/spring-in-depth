@@ -29,12 +29,10 @@ public class RequestApiService {
     }
 
 
-    public ObjectNode requestGetAPI(String apiNameKey, String... queryParams) {
+    public ResponseEntity<String> requestGetAPI(String apiNameKey, String... queryParams) {
         RestTemplate restTemplate = new RestTemplate();
         String uri = buildGetUri(PropManager.getInstance().getProperty("env.url") + PropManager.getInstance().getProperty(apiNameKey), queryParams);
-        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-        ObjectNode objectNode = new JsonUtility().getObjectNodFromString(response.getBody());
-        return objectNode;
+        return restTemplate.getForEntity(uri, String.class);
     }
 
 
@@ -50,6 +48,3 @@ public class RequestApiService {
     }
 }
 
-
-//        Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(payload);
-//        Map<Object, Object> result = flattenJson.entrySet().stream().collect(Collectors.toMap(d -> d.getKey(), d -> d.getValue()));

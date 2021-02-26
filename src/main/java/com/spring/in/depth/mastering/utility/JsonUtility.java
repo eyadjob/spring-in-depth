@@ -12,11 +12,10 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Service
 public class JsonUtility {
 
 
-    public Object getJsonFromString(String inputString) {
+    public static Object getJsonFromString(String inputString) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -28,7 +27,7 @@ public class JsonUtility {
         return null;
     }
 
-    public ObjectNode getObjectNodFromString(String input) {
+    public static ObjectNode getObjectNodFromString(String input) {
         try {
             JSONObject obj = new JSONObject();
             ObjectNode node = new ObjectMapper().readValue(input, ObjectNode.class);
@@ -39,7 +38,7 @@ public class JsonUtility {
         return null;
     }
 
-    public String getJsonStringFromObjectNode(ObjectNode jsonObjectNode) {
+    public static String getJsonStringFromObjectNode(ObjectNode jsonObjectNode) {
         String jsonString = null;
         try {
             jsonString = new ObjectMapper().writeValueAsString(jsonObjectNode);
@@ -49,7 +48,7 @@ public class JsonUtility {
         return jsonString;
     }
 
-    public String setNodesValuesAndGetJsonString(String payLoad, String... nodes) {
+    public static String setNodesValuesAndGetJsonString(String payLoad, String... nodes) {
         ObjectNode objectNode = getObjectNodFromString(payLoad);
         for (String node : nodes) {
             objectNode.put(node.split(":")[0], node.split(":")[1]);
@@ -57,7 +56,7 @@ public class JsonUtility {
         return getJsonStringFromObjectNode(objectNode);
     }
 
-    public String getJsonNodeValue(ObjectNode objectNode, String... nodeName) {
+    public static String getJsonNodeValue(ObjectNode objectNode, String... nodeName) {
         String nodeValue = "";
         JsonNode jsonNode = objectNode.deepCopy();
         for (String node : nodeName) {
@@ -68,7 +67,7 @@ public class JsonUtility {
         return nodeValue;
     }
 
-    public Map<Object, Object> getFlattenJson(String jsonPlayload) {
+    public static Map<Object, Object> getFlattenJson(String jsonPlayload) {
         Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(jsonPlayload);
         Map<Object, Object> result = flattenJson.entrySet().stream().collect(Collectors.toMap(d -> d.getKey(), d -> d.getValue()));
         return result;
@@ -79,7 +78,7 @@ public class JsonUtility {
             int index = Integer.parseInt(s.split(":")[0]);
             String key = s.split(":")[1];
             String value = s.split(":")[2];
-            ((ObjectNode) arrayNode.get(index)).put(key,value);
+            ((ObjectNode) arrayNode.get(index)).put(key, value);
         }
     }
 }
