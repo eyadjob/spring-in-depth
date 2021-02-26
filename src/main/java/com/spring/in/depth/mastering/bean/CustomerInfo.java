@@ -11,44 +11,35 @@ import java.util.Date;
 public class CustomerInfo {
 
     private String customerNumber;
+    private String phoneNumber;
+    private String firstName;
+    private String secondName;
+    private String LastName;
+    private String email;
 
     public CustomerInfo() {
         String currentTime = String.valueOf(new Date().getTime());
         this.customerNumber =  currentTime.substring(2, currentTime.length() - 1);
+        this.phoneNumber = "966-51" + currentTime.substring(5, currentTime.length() - 1);
+        this.firstName =  "FromEyadApiTestFrameworkPerfFN" + customerNumber;
+        this.secondName =  "perSN" + customerNumber;
+        this.LastName = "perLN" + customerNumber;
+        this.email = "perfTest" + customerNumber + "@iyelo.com";
+
     }
     public String getCustomerNumber() {
         String currentTime = String.valueOf(new Date().getTime());
         return currentTime.substring(2, currentTime.length() - 1);
     }
-    public String getFirstName() {
-        return "FromEyadApiTestFrameworkPerfFN" + customerNumber;
-    }
-
-    public String getSecondName() {
-        return "perSFN" + customerNumber;
-    }
-
-    public String getLastName() {
-        return "perLFN" + customerNumber;
-    }
-
-    public String getPhoneNumber() {
-        String currentTime = String.valueOf(new Date().getTime());
-        return "966-51" + currentTime.substring(5, currentTime.length() - 1);
-    }
-
-    public String getEmail() {
-        return "perfTest" + customerNumber + "@iyelo.com";
-    }
 
     public ObjectNode getCreateCustomerReadyPayload(ApisData apisData) {
 
         ObjectNode customerPayload = JsonUtility.getObjectNodFromString(PropManager.getInstance().getProperty("api.create.customer.post.payload"));
-        ((ObjectNode) customerPayload.get("customer").get("fullName")).put("first", getFirstName());
-        ((ObjectNode) customerPayload.get("customer").get("fullName")).put("second", getSecondName());
-        ((ObjectNode) customerPayload.get("customer").get("fullName")).put("family", getLastName());
-        ((ObjectNode) customerPayload.get("customer").get("contactInformation")).put("primaryPhone", getPhoneNumber());
-        ((ObjectNode) customerPayload.get("customer").get("contactInformation")).put("email", getEmail());
+        ((ObjectNode) customerPayload.get("customer").get("fullName")).put("first", firstName);
+        ((ObjectNode) customerPayload.get("customer").get("fullName")).put("second", secondName);
+        ((ObjectNode) customerPayload.get("customer").get("fullName")).put("family", LastName);
+        ((ObjectNode) customerPayload.get("customer").get("contactInformation")).put("primaryPhone", phoneNumber);
+        ((ObjectNode) customerPayload.get("customer").get("contactInformation")).put("email", email);
         ((ObjectNode) customerPayload.get("customer").get("basicInformation")).put("nationalityId", apisData.getValuesCache().get("countryId"));
         ((ObjectNode) customerPayload.get("customer").get("address")).put("countryId", apisData.getValuesCache().get("countryId"));
         JsonUtility.fillJsonArraysNodes((ArrayNode) customerPayload.get("customer").get("documents"),"0:issueCountryId:1","1:issueCountryId:1");

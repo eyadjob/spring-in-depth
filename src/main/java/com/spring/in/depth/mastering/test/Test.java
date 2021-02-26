@@ -21,7 +21,7 @@ public class Test {
     public void test(String countryName) {
         ApisData apisData = new ApisData();
         getApiServices.fillInitialData(apisData, countryName);
-        postApiService.authenticateUser(apisData,"ejarAdmin","123456");
+        postApiService.authenticateUser(apisData,"admin","ejarAdmin","123456");
 //        postApiService.createNewCustomer(apisData);
         System.out.println("test");
 

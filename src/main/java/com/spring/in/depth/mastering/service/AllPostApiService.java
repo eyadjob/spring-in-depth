@@ -18,13 +18,13 @@ public class AllPostApiService {
     @Autowired
     AllGetApiServices allGetApiServices;
 
-    public ResponseEntity<String> authenticateUser(ApisData apisData, String userName, String password) {
+    public ResponseEntity<String> authenticateUser(ApisData apisData, String userRole,String userName, String password) {
         HttpEntity<String> httpEntity = apisData.buildHttpEntityWithPayload(JsonUtility.setNodesValuesAndGetJsonString(PropManager.getInstance().getProperty("api.authenticate.post.payload"), "userNameOrEmailAddress:" + userName, "password:" + password));
         ResponseEntity<String> response = requestApiService.requestPostAPI("api.authentication", httpEntity);
         ObjectNode authResponse = JsonUtility.getObjectNodFromString(response.getBody());
         String userAccessToken = "Bearer " + authResponse.get("result").get("accessToken").textValue();
         apisData.getDefaultHeaders().addIfAbsent("Authorization", userAccessToken);
-        apisData.getValuesCache().put(userName, userAccessToken);
+        apisData.getAuthenticationInfo().getUserAccessTokens().put(userRole,userAccessToken);
         return response;
     }
 

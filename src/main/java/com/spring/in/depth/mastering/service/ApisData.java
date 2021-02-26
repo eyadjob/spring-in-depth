@@ -1,6 +1,11 @@
 package com.spring.in.depth.mastering.service;
 
+import com.spring.in.depth.mastering.bean.AuthenticationInfo;
+import com.spring.in.depth.mastering.bean.CountryInfo;
+import com.spring.in.depth.mastering.bean.CustomerInfo;
+import com.spring.in.depth.mastering.bean.VehicleInfo;
 import com.spring.in.depth.mastering.utility.PropManager;
+import lombok.Data;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
@@ -8,16 +13,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+@Data
 public class ApisData {
 
     private final Map<String, String> valuesCache;
     private final HttpHeaders defaultHeaders;
-
+    private CountryInfo countryInfo;
+    private VehicleInfo vehicleInfo;
+    private CustomerInfo customerInfo;
+    private AuthenticationInfo authenticationInfo;
 
     public ApisData() {
         this.valuesCache = new HashMap<>();
         this.defaultHeaders = buildDefaultHeaders();
-
+        this.countryInfo = new CountryInfo();
+        this.vehicleInfo = new VehicleInfo();
+        this.customerInfo = new CustomerInfo();
+        this.authenticationInfo = new AuthenticationInfo();
     }
 
     public HttpEntity<String> buildHttpEntityWithPayload(String jsonPayload, HttpHeaders headers) {

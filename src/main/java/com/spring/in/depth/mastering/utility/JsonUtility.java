@@ -6,13 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.wnameless.json.flattener.JsonFlattener;
+import com.spring.in.depth.mastering.service.ApisData;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class JsonUtility {
+public class JsonUtility<T> {
 
 
     public static Object getJsonFromString(String inputString) {
@@ -67,9 +68,15 @@ public class JsonUtility {
         return nodeValue;
     }
 
-    public static Map<Object, Object> getFlattenJson(String jsonPlayload) {
+    public Map<T, T> getFlattenJson(String jsonPlayload) {
         Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(jsonPlayload);
-        Map<Object, Object> result = flattenJson.entrySet().stream().collect(Collectors.toMap(d -> d.getKey(), d -> d.getValue()));
+        Map<T, T> result = flattenJson.entrySet().stream().filter(d -> d.getValue() != null).collect(Collectors.toMap(d ->(T) d.getKey(), d ->(T) d.getValue()));
+        return result;
+    }
+
+    public Map<T, T> getFlattenJson(String apiName, String jsonPlayload) {
+        Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(jsonPlayload);
+        Map<T, T> result = flattenJson.entrySet().stream().filter(d -> d.getValue() != null).collect(Collectors.toMap(d ->(T) (apiName+"."+d.getKey()), d ->(T) d.getValue()));
         return result;
     }
 
@@ -79,6 +86,26 @@ public class JsonUtility {
             String key = s.split(":")[1];
             String value = s.split(":")[2];
             ((ObjectNode) arrayNode.get(index)).put(key, value);
+        }
+    }
+
+    public  Map<T,T> setJsonValuesInMap(String apiName,String jsonPayload) {
+        return getFlattenJson(apiName,jsonPayload);
+    }
+
+    //this is a try to loop through all nodes in JsonObject it was successfully to large degree just get the field name and it easy thing to do
+    public void fillJsonNodesValuesRec(Object nodes) {
+        if (!(nodes instanceof ArrayNode) && !(nodes instanceof ObjectNode)) {
+            ((ObjectNode) nodes).get("value");
+            return;
+        }
+
+        for (JsonNode js : (JsonNode) nodes) {
+            if (js instanceof ObjectNode)
+                nodes = (ObjectNode) js;
+            else if (js instanceof ArrayNode)
+                nodes = (ArrayNode) js;
+            fillJsonNodesValuesRec(nodes);
         }
     }
 }
