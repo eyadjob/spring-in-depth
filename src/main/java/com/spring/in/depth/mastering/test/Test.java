@@ -21,7 +21,7 @@ public class Test {
         postApiService.authenticateUser(apisData, "admin", "ejarAdmin", "123456");
         getApiServices.fillInitialData(apisData, countryName);
         apisData.getVehicleInfo().fillVehicleRequiredDate(apisData);
-//        postApiService.createNewCustomer(apisData);
+        postApiService.createNewCustomer(apisData);
         System.out.println("test");
 
     }

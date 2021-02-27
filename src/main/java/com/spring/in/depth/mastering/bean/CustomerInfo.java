@@ -40,13 +40,13 @@ public class CustomerInfo {
         ((ObjectNode) customerPayload.get("customer").get("fullName")).put("family", LastName);
         ((ObjectNode) customerPayload.get("customer").get("contactInformation")).put("primaryPhone", phoneNumber);
         ((ObjectNode) customerPayload.get("customer").get("contactInformation")).put("email", email);
-        ((ObjectNode) customerPayload.get("customer").get("basicInformation")).put("nationalityId", apisData.getValuesCache().get("countryId"));
-        ((ObjectNode) customerPayload.get("customer").get("address")).put("countryId", apisData.getValuesCache().get("countryId"));
+        ((ObjectNode) customerPayload.get("customer").get("basicInformation")).put("nationalityId", apisData.getCountryInfo().getCountryId());
+        ((ObjectNode) customerPayload.get("customer").get("address")).put("countryId", apisData.getCountryInfo().getCountryId());
         JsonUtility.fillJsonArraysNodes((ArrayNode) customerPayload.get("customer").get("documents"),"0:issueCountryId:1","1:issueCountryId:1");
         JsonUtility.fillJsonArraysNodes((ArrayNode) customerPayload.get("customer").get("documents"),"0:typeId:250","1:typeId:250");
         JsonUtility.fillJsonArraysNodes((ArrayNode) customerPayload.get("customer").get("documents"),"0:number:"+customerNumber,"1:number:"+customerNumber);
         JsonUtility.fillJsonArraysNodes((ArrayNode) customerPayload.get("customer").get("documents"),"0:typeName:Identity","1:typeName:Identity");
-        String countryName =apisData.getValuesCache().get("countryName");
+        String countryName =apisData.getCountryInfo().getCountryName();
         JsonUtility.fillJsonArraysNodes((ArrayNode) customerPayload.get("customer").get("documents"),"0:issueCountry:"+countryName,"1:issueCountry:"+countryName);
         customerPayload.put("sourceId", 120);
         return customerPayload;
