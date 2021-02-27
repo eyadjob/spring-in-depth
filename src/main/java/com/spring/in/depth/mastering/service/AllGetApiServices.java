@@ -1,6 +1,8 @@
 package com.spring.in.depth.mastering.service;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.spring.in.depth.mastering.bean.Branches;
+import com.spring.in.depth.mastering.bean.FuelTypes;
 import com.spring.in.depth.mastering.entity.ejar.stg.EjarCountryEntity;
 import com.spring.in.depth.mastering.repository.ejar.stg.EjarCountryRepository;
 import com.spring.in.depth.mastering.utility.JsonUtility;
@@ -49,15 +51,19 @@ public class AllGetApiServices {
 
     public ApisData getInsuranceCompany(ApisData apisData, long countryId, boolean includeActive) {
         ResponseEntity<String> response = requestApiService.requestGetAPI("api.GetInsuranceCompany", "countryId=" + countryId, "includeActive=" + includeActive);
-        apisData.getVehicleInfo().setInsuranceCompanyInfoList(apisData,JsonUtility.getObjectNodFromString(response.getBody()));
+        apisData.getVehicleInfo().setInsuranceCompanyInfoList(apisData, JsonUtility.getObjectNodFromString(response.getBody()));
         return apisData;
     }
 
 
     public ApisData getFuelType(ApisData apisData, long countryId, boolean includeActive) {
         ResponseEntity<String> response = requestApiService.requestGetAPI("api.GetInsuranceCompany", "countryId=" + countryId, "includeActive=" + includeActive);
-        apisData.getValuesCache().putAll(new JsonUtility<String>().setJsonValuesInMap("insuranceCompany",response.getBody()));
-        apisData.getVehicleInfo().setInsuranceCompanyInfoList(apisData,JsonUtility.getObjectNodFromString(response.getBody()));
+        apisData.getVehicleInfo().setInsuranceCompanyInfoList(apisData, JsonUtility.getObjectNodFromString(response.getBody()));
+        return apisData;
+    }
+
+    public ApisData getBranches(ApisData apisData, String... params) {
+        apisData.getCountryInfo().setBranchesList( (Branches)requestApiService.requestExchangeAPI(Branches.class,apisData.buildHttpEntityWithPayload(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + params[0], "includeInActive=" + params[1],"includeAll="+params[2],"filterTypes="+params[3],"filterTypes="+params[4]).getBody());
         return apisData;
     }
 
@@ -65,13 +71,11 @@ public class AllGetApiServices {
         apisData.getCountryInfo().setCurrencyName(currencyInfoResponse.get("result").get("name").textValue());
         apisData.getCountryInfo().setCurrencyIsoCode(currencyInfoResponse.get("result").get("isoCode").textValue());
 
-
 //        apisData.getValuesCache().put("currencyId", currencyInfoResponse.get("result").get("id").textValue());
 //        apisData.getValuesCache().put("currencyName", currencyInfoResponse.get("result").get("name").textValue());
 //        apisData.getValuesCache().put("currencyIsoCode", currencyInfoResponse.get("result").get("isoCode").textValue());
 //        0apisData.getValuesCache().put("currencyDecimalPlaces", currencyInfoResponse.get("result").get("decimalPlaces").textValue());
     }
-
 
 
 }
