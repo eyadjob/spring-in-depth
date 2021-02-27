@@ -27,9 +27,9 @@ public class ApisData {
         this.valuesCache = new HashMap<>();
         this.defaultHeaders = buildDefaultHeaders();
         this.countryInfo = new CountryInfo();
-        this.vehicleInfo = new VehicleInfo();
         this.customerInfo = new CustomerInfo();
         this.authenticationInfo = new AuthenticationInfo();
+        this.vehicleInfo = new VehicleInfo();
     }
 
     public HttpEntity<String> buildHttpEntityWithPayload(String jsonPayload, HttpHeaders headers) {
@@ -39,6 +39,7 @@ public class ApisData {
     public HttpEntity<String> buildHttpEntityWithPayload(String jsonPayload) {
         return new HttpEntity<>(jsonPayload, defaultHeaders);
     }
+
 
     public HttpEntity<String> buildHttpEntityWithPayload(HttpHeaders headers) {
         return new HttpEntity<>(headers);

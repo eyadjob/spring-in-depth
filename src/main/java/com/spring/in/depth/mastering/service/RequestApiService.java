@@ -34,6 +34,12 @@ public class RequestApiService {
         String uri = buildGetUri(PropManager.getInstance().getProperty("env.url") + PropManager.getInstance().getProperty(apiNameKey), queryParams);
         return restTemplate.getForEntity(uri, String.class);
     }
+    public ResponseEntity<Object> requestGetAPI(Class className, String apiNameKey, String... queryParams) {
+        RestTemplate restTemplate = new RestTemplate();
+        String uri = buildGetUri(PropManager.getInstance().getProperty("env.url") + PropManager.getInstance().getProperty(apiNameKey), queryParams);
+        return  restTemplate.getForEntity(uri, className);
+    }
+
 
 
     public String buildGetUri(String url, String... params) {

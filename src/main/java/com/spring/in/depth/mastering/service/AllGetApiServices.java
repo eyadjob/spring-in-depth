@@ -49,9 +49,15 @@ public class AllGetApiServices {
 
     public ApisData getInsuranceCompany(ApisData apisData, long countryId, boolean includeActive) {
         ResponseEntity<String> response = requestApiService.requestGetAPI("api.GetInsuranceCompany", "countryId=" + countryId, "includeActive=" + includeActive);
+        apisData.getVehicleInfo().setInsuranceCompanyInfoList(apisData,JsonUtility.getObjectNodFromString(response.getBody()));
+        return apisData;
+    }
+
+
+    public ApisData getFuelType(ApisData apisData, long countryId, boolean includeActive) {
+        ResponseEntity<String> response = requestApiService.requestGetAPI("api.GetInsuranceCompany", "countryId=" + countryId, "includeActive=" + includeActive);
         apisData.getValuesCache().putAll(new JsonUtility<String>().setJsonValuesInMap("insuranceCompany",response.getBody()));
         apisData.getVehicleInfo().setInsuranceCompanyInfoList(apisData,JsonUtility.getObjectNodFromString(response.getBody()));
-
         return apisData;
     }
 
