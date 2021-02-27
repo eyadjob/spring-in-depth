@@ -7,7 +7,7 @@ import com.spring.in.depth.mastering.utility.JsonUtility;
 
 import java.util.Map;
 
-public class InsuranceCompanyInfo {
+public class InsuranceCompanyInfo extends DefaultItemsResponseBean{
 
     private String insuranceCompanyName;
     private String insuranceCompanyId;
