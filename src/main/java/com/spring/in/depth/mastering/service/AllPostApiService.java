@@ -19,7 +19,7 @@ public class AllPostApiService {
     AllGetApiServices allGetApiServices;
 
     public ResponseEntity<String> authenticateUser(ApisData apisData, String userRole,String userName, String password) {
-        HttpEntity<String> httpEntity = apisData.buildHttpEntityWithPayload(JsonUtility.setNodesValuesAndGetJsonString(PropManager.getInstance().getProperty("api.authenticate.post.payload"), "userNameOrEmailAddress:" + userName, "password:" + password));
+        HttpEntity<String> httpEntity = apisData.buildHttpEntity(JsonUtility.setNodesValuesAndGetJsonString(PropManager.getInstance().getProperty("api.authenticate.post.payload"), "userNameOrEmailAddress:" + userName, "password:" + password));
         ResponseEntity<String> response = requestApiService.requestPostAPI("api.authentication", httpEntity);
         ObjectNode authResponse = JsonUtility.getObjectNodFromString(response.getBody());
         String userAccessToken = "Bearer " + authResponse.get("result").get("accessToken").textValue();
@@ -31,7 +31,7 @@ public class AllPostApiService {
     public ResponseEntity<String> createNewCustomer(ApisData apisData) {
         allGetApiServices.getCountryInfoByName(apisData,"Saudi");
         ObjectNode createCustomerPayload = new CustomerInfo().getCreateCustomerReadyPayload(apisData);
-        return requestApiService.requestPostAPI("api.create.customer", apisData.buildHttpEntityWithPayload(JsonUtility.getJsonStringFromObjectNode(createCustomerPayload), apisData.getDefaultHeaders()));
+        return requestApiService.requestPostAPI("api.create.customer", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(createCustomerPayload), apisData.getDefaultHeaders()));
     }
 
 }

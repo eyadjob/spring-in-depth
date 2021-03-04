@@ -29,15 +29,6 @@ public class VehicleInfo {
         settRandomValidChassisNumber();
     }
 
-    public void fillVehicleRequiredDate(ApisData apisData) {
-       this.fuelTypes = getFuelTypes(apisData);
-    }
-
-
-    public FuelTypes getFuelTypes(ApisData apisData) {
-       return (FuelTypes) SpringContextHelper.getBean(RequestApiService.class).requestGetAPI(FuelTypes.class, "api.GetFuelTypes", "countryId=" + apisData.getCountryInfo().getCountryId(), "includeActive=" + false, "isSelectedId=" + -1).getBody();
-    }
-
     public void settRandomValidPlateNumber() {
         String alpha = "abcdefghijklmnopqrstuvwxyz";
         Random r = new Random();

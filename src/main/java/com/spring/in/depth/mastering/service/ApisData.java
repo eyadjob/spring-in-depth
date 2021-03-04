@@ -32,20 +32,21 @@ public class ApisData {
         this.vehicleInfo = new VehicleInfo();
     }
 
-    public HttpEntity<String> buildHttpEntityWithPayload(String jsonPayload, HttpHeaders headers) {
+    public HttpEntity<String> buildHttpEntity(String jsonPayload, HttpHeaders headers) {
         return new HttpEntity<>(jsonPayload, headers);
     }
 
-    public HttpEntity<String> buildHttpEntityWithPayload(String jsonPayload) {
+    public HttpEntity<String> buildHttpEntity(String jsonPayload) {
         return new HttpEntity<>(jsonPayload, defaultHeaders);
     }
 
 
-    public HttpEntity<String> buildHttpEntityWithPayload(HttpHeaders headers) {
+    public HttpEntity<String> buildHttpEntity(HttpHeaders headers) {
         return new HttpEntity<>(headers);
     }
 
-    public HttpEntity<String> buildHttpEntityWithPayload() {
+
+    public HttpEntity<String> buildHttpEntity() {
         return new HttpEntity<>(defaultHeaders);
     }
 

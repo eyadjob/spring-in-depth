@@ -1,7 +1,7 @@
 package com.spring.in.depth.mastering.controller;
 
 import com.spring.in.depth.mastering.service.CustomerService;
-import com.spring.in.depth.mastering.test.Test;
+import com.spring.in.depth.mastering.test.TestScenarios;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +17,11 @@ public class TestController {
     CustomerService customerService;
 
     @Autowired
-    Test test;
+    TestScenarios testScenarios;
 
     @RequestMapping(path = "/CreateCustomer/", method = RequestMethod.GET)
     public void getTest() {
-    test.test("Saudi");
+    testScenarios.test("Saudi");
 
 
 //        for (int i = 0; i < 10; i++) {

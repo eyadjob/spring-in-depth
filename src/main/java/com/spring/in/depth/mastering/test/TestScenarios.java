@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Test {
+public class TestScenarios {
 
 
     @Autowired
@@ -20,9 +20,9 @@ public class Test {
         ApisData apisData = new ApisData();
         postApiService.authenticateUser(apisData, "admin", "ejarAdmin", "123456");
         getApiServices.fillInitialData(apisData, countryName);
-        apisData.getVehicleInfo().fillVehicleRequiredDate(apisData);
+        getApiServices.fillVehicleData(apisData);
         getApiServices.getBranches(apisData,String.valueOf(apisData.getCountryInfo().getCountryId()),String.valueOf(false),String.valueOf(false),String.valueOf(8900),String.valueOf(8902));
-//        postApiService.createNewCustomer(apisData);
+        postApiService.createNewCustomer(apisData);
         System.out.println("test");
 
     }

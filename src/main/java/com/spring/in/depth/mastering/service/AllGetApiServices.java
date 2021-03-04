@@ -31,15 +31,17 @@ public class AllGetApiServices {
         return apisData;
     }
 
+    public ApisData fillVehicleData(ApisData apisData) {
+       FuelTypes fuelTypes = (FuelTypes) requestApiService.requestExchangeAPI(FuelTypes.class, apisData.buildHttpEntity(),"api.GetFuelTypes", "countryId=" + apisData.getCountryInfo().getCountryId(), "includeActive=" + false, "isSelectedId=" + -1).getBody();
+       apisData.getVehicleInfo().setFuelTypes(fuelTypes);
+        return apisData;
+    }
+
     public ApisData getCountryInfoByName(ApisData apisData, String countryName) {
         List<EjarCountryEntity> ejarCountryEntityList = ejarCountryRepository.getCountryLikeName(countryName);
         apisData.getCountryInfo().setCountryId(ejarCountryEntityList.get(0).getId());
         apisData.getCountryInfo().setCurrencyId(ejarCountryEntityList.get(0).getCurrencyId());
         apisData.getCountryInfo().setCountryName(ejarCountryEntityList.get(0).getCountryNameBasedOnLang());
-
-//        apisData.getValuesCache().put("countryId", String.valueOf(ejarCountryEntityList.get(0).getId()));
-//        apisData.getValuesCache().put("currencyId", String.valueOf(ejarCountryEntityList.get(0).getCurrencyId()));
-//        apisData.getValuesCache().put("countryName", ejarCountryEntityList.get(0).getCountryNameBasedOnLang());
         return apisData;
     }
 
@@ -63,7 +65,7 @@ public class AllGetApiServices {
     }
 
     public ApisData getBranches(ApisData apisData, String... params) {
-        apisData.getCountryInfo().setBranchesList( (Branches)requestApiService.requestExchangeAPI(Branches.class,apisData.buildHttpEntityWithPayload(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + params[0], "includeInActive=" + params[1],"includeAll="+params[2],"filterTypes="+params[3],"filterTypes="+params[4]).getBody());
+        apisData.getCountryInfo().setBranchesList( (Branches)requestApiService.requestExchangeAPI(Branches.class,apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + params[0], "includeInActive=" + params[1],"includeAll="+params[2],"filterTypes="+params[3],"filterTypes="+params[4]).getBody());
         return apisData;
     }
 
