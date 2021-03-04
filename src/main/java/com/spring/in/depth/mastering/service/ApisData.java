@@ -20,7 +20,6 @@ public class ApisData {
     private final Map<String, String> valuesCache;
     private final HttpHeaders defaultHeaders;
     private CountryInfo countryInfo;
-    private CurrnecyInfo currnecyInfo;
     private VehicleInfo vehicleInfo;
     private CustomerInfo customerInfo;
     private AuthenticationInfo authenticationInfo;
