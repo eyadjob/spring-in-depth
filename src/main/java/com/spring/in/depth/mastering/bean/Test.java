@@ -1,5 +1,8 @@
 package com.spring.in.depth.mastering.bean;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -24,6 +27,12 @@ public class Test {
         d8 = cal8.getTime(); // returns new date
         System.out.println(d8);
 
+
+        try {
+            System.out.println( URLEncoder.encode("2021-03-04T16:57:57z`", StandardCharsets.UTF_8.toString()));;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
 
         new Test();
