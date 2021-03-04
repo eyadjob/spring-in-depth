@@ -1,7 +1,7 @@
 package com.spring.in.depth.mastering.service;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.spring.in.depth.mastering.bean.CustomerInfo;
+import com.spring.in.depth.mastering.pojo.CustomerInfo;
 import com.spring.in.depth.mastering.utility.JsonUtility;
 import com.spring.in.depth.mastering.utility.PropManager;
 import org.springframework.beans.factory.annotation.Autowired;

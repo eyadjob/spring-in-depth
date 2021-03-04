@@ -1,8 +1,8 @@
-package com.spring.in.depth.mastering.bean;
+package com.spring.in.depth.mastering.pojo;
 
+import com.spring.in.depth.mastering.bean.Branches;
+import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class CountryInfo {
@@ -12,7 +12,7 @@ public class CountryInfo {
     private String currencyIsoCode;
     private String currencyName;
     private String currencyDecimalPlaces;
-    private long currencyId;
     private Branches branchesList;
+    private CurrnecyInfo currnecyInfo = new CurrnecyInfo();
 
 }

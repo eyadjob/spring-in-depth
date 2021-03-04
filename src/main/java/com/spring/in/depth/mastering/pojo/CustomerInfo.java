@@ -1,4 +1,4 @@
-package com.spring.in.depth.mastering.bean;
+package com.spring.in.depth.mastering.pojo;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;

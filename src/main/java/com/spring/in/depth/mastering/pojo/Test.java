@@ -1,4 +1,4 @@
-package com.spring.in.depth.mastering.bean;
+package com.spring.in.depth.mastering.pojo;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

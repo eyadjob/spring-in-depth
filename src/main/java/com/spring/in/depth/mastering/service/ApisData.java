@@ -1,9 +1,10 @@
 package com.spring.in.depth.mastering.service;
 
 import com.spring.in.depth.mastering.bean.AuthenticationInfo;
-import com.spring.in.depth.mastering.bean.CountryInfo;
-import com.spring.in.depth.mastering.bean.CustomerInfo;
-import com.spring.in.depth.mastering.bean.VehicleInfo;
+import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
+import com.spring.in.depth.mastering.pojo.CountryInfo;
+import com.spring.in.depth.mastering.pojo.CustomerInfo;
+import com.spring.in.depth.mastering.pojo.VehicleInfo;
 import com.spring.in.depth.mastering.utility.PropManager;
 import lombok.Data;
 import org.springframework.http.HttpEntity;
@@ -19,6 +20,7 @@ public class ApisData {
     private final Map<String, String> valuesCache;
     private final HttpHeaders defaultHeaders;
     private CountryInfo countryInfo;
+    private CurrnecyInfo currnecyInfo;
     private VehicleInfo vehicleInfo;
     private CustomerInfo customerInfo;
     private AuthenticationInfo authenticationInfo;
