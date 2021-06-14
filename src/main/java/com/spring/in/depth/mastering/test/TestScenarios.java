@@ -6,6 +6,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
 
 import com.spring.in.depth.mastering.pojo.ExtentReportsFactory;
+import com.spring.in.depth.mastering.report.ExtentReportsCustom;
 import com.spring.in.depth.mastering.report.ExtentTestCustom;
 import com.spring.in.depth.mastering.service.AllGetApiServices;
 import com.spring.in.depth.mastering.service.AllPostApiService;
@@ -38,7 +39,7 @@ public class TestScenarios {
         System.out.println(apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData));
 
          ExtentReportsFactory.createExtentHtmlReporter("Eyad first report");
-        ExtentReports extentReports = new ExtentReports();
+        ExtentReportsCustom extentReports = new ExtentReportsCustom();
         ExtentTestCustom testResult = new ExtentTestCustom(extentReports, "eyad new", "eyad first report");
         System.out.println("test");
 

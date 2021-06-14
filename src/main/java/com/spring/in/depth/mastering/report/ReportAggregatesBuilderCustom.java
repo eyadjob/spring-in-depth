@@ -11,20 +11,20 @@ import java.util.List;
 
 public class ReportAggregatesBuilderCustom {
 
-    private List<Test> testList;
+    private List<TestCustom> testList;
     private List<String> testRunnerLogs;
-    private TestAttributeTestContextProvider<Category> categoryContext;
-    private TestAttributeTestContextProvider<Author> authorContext;
-    private TestAttributeTestContextProvider<Device> deviceContext;
-    private ExceptionTestContextImpl exceptionContext;
+    private TestAttributeTestContextProviderCustom<Category> categoryContext;
+    private TestAttributeTestContextProviderCustom<Author> authorContext;
+    private TestAttributeTestContextProviderCustom<Device> deviceContext;
+    private ExceptionTestContextImplCustom exceptionContext;
     private SystemAttributeContext systemAttributeContext;
-    private ReportStatusStats reportStatusStats;
-    private List<Status> statusList;
+    private ReportStatusStatsCustom reportStatusStats;
+    private List<StatusCustom> statusList;
     private Date startTime;
     private Date endTime;
 
-    public ReportAggregatesBuilderCustom build() {
-        ReportAggregatesBuilderCustom aggregates = new ReportAggregatesBuilderCustom();
+    public ReportAggregatesCustom build() {
+        ReportAggregatesCustom aggregates = new ReportAggregatesCustom();
         aggregates.setTestList(testList);
         aggregates.setTestRunnerLogs(testRunnerLogs);
         aggregates.setCategoryContext(categoryContext);
@@ -39,7 +39,7 @@ public class ReportAggregatesBuilderCustom {
         return aggregates;
     }
 
-    public ReportAggregatesBuilderCustom setTestList(List<Test> testList) {
+    public ReportAggregatesBuilderCustom setTestList(List<TestCustom> testList) {
         this.testList = testList;
         return this;
     }
@@ -49,22 +49,22 @@ public class ReportAggregatesBuilderCustom {
         return this;
     }
 
-    public ReportAggregatesBuilderCustom setCategoryContext(TestAttributeTestContextProvider<Category> categoryContext) {
+    public ReportAggregatesBuilderCustom setCategoryContext(TestAttributeTestContextProviderCustom<Category> categoryContext) {
         this.categoryContext = categoryContext;
         return this;
     }
 
-    public ReportAggregatesBuilderCustom setAuthorContext(TestAttributeTestContextProvider<Author> authorContext) {
+    public ReportAggregatesBuilderCustom setAuthorContext(TestAttributeTestContextProviderCustom<Author> authorContext) {
         this.authorContext = authorContext;
         return this;
     }
 
-    public ReportAggregatesBuilderCustom setDeviceContext(TestAttributeTestContextProvider<Device> deviceContext) {
+    public ReportAggregatesBuilderCustom setDeviceContext(TestAttributeTestContextProviderCustom<Device> deviceContext) {
         this.deviceContext = deviceContext;
         return this;
     }
 
-    public ReportAggregatesBuilderCustom setExceptionContext(ExceptionTestContextImpl exceptionContext) {
+    public ReportAggregatesBuilderCustom setExceptionContext(ExceptionTestContextImplCustom exceptionContext) {
         this.exceptionContext = exceptionContext;
         return this;
     }
@@ -74,12 +74,12 @@ public class ReportAggregatesBuilderCustom {
         return this;
     }
 
-    public ReportAggregatesBuilderCustom setReportStatusStats(ReportStatusStats reportStatusStats) {
+    public ReportAggregatesBuilderCustom setReportStatusStats(ReportStatusStatsCustom reportStatusStats) {
         this.reportStatusStats = reportStatusStats;
         return this;
     }
 
-    public ReportAggregatesBuilderCustom setStatusList(List<Status> statusList) {
+    public ReportAggregatesBuilderCustom setStatusList(List<StatusCustom> statusList) {
         this.statusList = statusList;
         return this;
     }

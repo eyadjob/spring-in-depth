@@ -4,5 +4,5 @@ import com.aventstack.extentreports.ExtentReporter;
 
 public interface ReportServiceCustom {
 
-    void attachReporter(ExtentReportCustom... reporter);
+    void attachReporter(ExtentReporterCustom... reporter);
 }

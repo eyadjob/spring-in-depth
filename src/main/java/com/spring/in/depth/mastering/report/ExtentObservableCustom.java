@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ExtentObservableCustom implements ReportServiceCustom {
+abstract class ExtentObservableCustom implements ReportServiceCustom {
 
     /**
      * The current AnalysisStrategy for the run session. This decides the technique used
@@ -511,7 +511,7 @@ public class ExtentObservableCustom implements ReportServiceCustom {
         if (!testList.isEmpty() && testList.get(0).isBehaviorDrivenType()) {
             strategy = AnalysisStrategyCustom.BDD;
         }
-        ReportAggregatesCustom reportAggregates = new ReportAggregatesCustom()
+        ReportAggregatesCustom reportAggregates = new ReportAggregatesBuilderCustom()
                 .setAuthorContext(authorContext)
                 .setCategoryContext(categoryContext)
                 .setDeviceContext(deviceContext)
