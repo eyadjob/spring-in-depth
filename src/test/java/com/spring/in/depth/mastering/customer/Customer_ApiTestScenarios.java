@@ -39,18 +39,12 @@ import org.testng.annotations.Listeners;
 @AutoConfigureMockMvc
 @TestPropertySource(
         locations = "classpath:application.properties")
-//@PropertySource("classpath:application.properties")
+@Listeners(ExtentITestListenerClassAdapter.class)
 public class Customer_ApiTestScenarios {
 
 
     @InjectMocks
     private TestScenarios testScenarios;
-
-    @Mock
-    AllPostApiService postApiService;
-
-    @Mock
-    AllGetApiServices getApiServices;
 
     @Test
     public void CreateCustomer() {

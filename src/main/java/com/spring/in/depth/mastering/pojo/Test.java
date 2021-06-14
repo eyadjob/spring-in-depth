@@ -3,6 +3,8 @@ package com.spring.in.depth.mastering.pojo;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -24,8 +26,23 @@ public class Test {
 //        cal8.add(Calendar.DAY_OF_MONTH,1); // adds one
         cal8.add(Calendar.HOUR_OF_DAY,1); //adds one hour
         cal8.add(Calendar.MINUTE,20); //adds one hour
-        d8 = cal8.getTime(); // returns new date
+        ; // returns new date
         System.out.println(d8);
+
+        String pattern = "yyyy-MM-dd HH:mm:ss";
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String nowDate = "2021-03-07 18:30:38.6793374 +03:00";
+        try {
+            Date date1 = simpleDateFormat.parse(nowDate);
+            Calendar cal9 = Calendar.getInstance(); // creates calendar
+            cal9.setTime(date1);
+            cal9.add(Calendar.MINUTE,-5);
+            date1 = cal9.getTime();
+            System.out.println("date after adding 5 minutes: " + simpleDateFormat.format(date1) + ".0000000 +03:00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
         try {

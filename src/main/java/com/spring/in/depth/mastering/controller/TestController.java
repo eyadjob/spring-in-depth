@@ -24,13 +24,18 @@ public class TestController {
     testScenarios.test("Saudi");
 
 
-//        for (int i = 0; i < 10; i++) {
+//        for (int i = 0; i < 100; i++) {
 //            System.out.println("in thread number:" + i );
+//            try {
+//                Thread.sleep(500);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 ////         Runnable task = () -> {customerService.createNewCustomer();};
 //            Thread thread1 = new Thread(new Runnable() {
 //                @Override
 //                public void run(){
-//                    customerService.createNewCustomer();
+//                    testScenarios.test("Saudi");
 //                }
 //            });
 //
