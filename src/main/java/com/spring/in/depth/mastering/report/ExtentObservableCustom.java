@@ -3,6 +3,8 @@ package com.spring.in.depth.mastering.report;
 import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.model.*;
 import com.aventstack.extentreports.reporter.BasicFileReporter;
+import com.spring.in.depth.mastering.report.implinterface.ExtentReporterCustom;
+import com.spring.in.depth.mastering.report.implinterface.ReportServiceCustom;
 
 import java.io.IOException;
 import java.util.*;

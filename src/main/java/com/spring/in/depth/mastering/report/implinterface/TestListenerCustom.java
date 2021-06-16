@@ -1,6 +1,8 @@
-package com.spring.in.depth.mastering.report;
+package com.spring.in.depth.mastering.report.implinterface;
 
 import com.aventstack.extentreports.model.*;
+import com.spring.in.depth.mastering.report.LogCustom;
+import com.spring.in.depth.mastering.report.TestCustom;
 
 import java.io.IOException;
 

@@ -1,6 +1,7 @@
-package com.spring.in.depth.mastering.report;
+package com.spring.in.depth.mastering.report.implinterface;
 
 import com.aventstack.extentreports.ReportAggregates;
+import com.spring.in.depth.mastering.report.ReportAggregatesCustom;
 
 public interface ExtentReporterCustom
         extends TestListenerCustom, AnalysisStrategyServiceCustom {

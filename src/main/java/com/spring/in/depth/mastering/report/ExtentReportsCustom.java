@@ -4,6 +4,7 @@ import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.gherkin.GherkinDialectProvider;
 import com.aventstack.extentreports.gherkin.model.IGherkinFormatterModel;
 import com.aventstack.extentreports.model.SystemAttribute;
+import com.spring.in.depth.mastering.report.implinterface.ExtentReporterCustom;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;

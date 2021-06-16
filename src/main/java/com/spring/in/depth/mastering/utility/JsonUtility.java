@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.wnameless.json.flattener.JsonFlattener;
-import com.spring.in.depth.mastering.service.ApisData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.json.simple.JSONObject;
-import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -68,18 +68,6 @@ public class JsonUtility<T> {
         return nodeValue;
     }
 
-    public Map<T, T> getFlattenJson(String jsonPlayload) {
-        Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(jsonPlayload);
-        Map<T, T> result = flattenJson.entrySet().stream().filter(d -> d.getValue() != null).collect(Collectors.toMap(d ->(T) d.getKey(), d ->(T) d.getValue()));
-        return result;
-    }
-
-    public Map<T, T> getFlattenJson(String apiName, String jsonPlayload) {
-        Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(jsonPlayload);
-        Map<T, T> result = flattenJson.entrySet().stream().filter(d -> d.getValue() != null).collect(Collectors.toMap(d ->(T) (apiName+"."+d.getKey()), d ->(T) d.getValue()));
-        return result;
-    }
-
     public static void fillJsonArraysNodes(ArrayNode arrayNode, String... indexKeysAndValues) {
         for (String s : indexKeysAndValues) {
             int index = Integer.parseInt(s.split(":")[0]);
@@ -89,8 +77,20 @@ public class JsonUtility<T> {
         }
     }
 
-    public  Map<T,T> setJsonValuesInMap(String apiName,String jsonPayload) {
-        return getFlattenJson(apiName,jsonPayload);
+    public Map<T, T> getFlattenJson(String jsonPlayload) {
+        Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(jsonPlayload);
+        Map<T, T> result = flattenJson.entrySet().stream().filter(d -> d.getValue() != null).collect(Collectors.toMap(d -> (T) d.getKey(), d -> (T) d.getValue()));
+        return result;
+    }
+
+    public Map<T, T> getFlattenJson(String apiName, String jsonPlayload) {
+        Map<String, Object> flattenJson = JsonFlattener.flattenAsMap(jsonPlayload);
+        Map<T, T> result = flattenJson.entrySet().stream().filter(d -> d.getValue() != null).collect(Collectors.toMap(d -> (T) (apiName + "." + d.getKey()), d -> (T) d.getValue()));
+        return result;
+    }
+
+    public Map<T, T> setJsonValuesInMap(String apiName, String jsonPayload) {
+        return getFlattenJson(apiName, jsonPayload);
     }
 
     //this is a try to loop through all nodes in JsonObject it was successfully to large degree just get the field name and it easy thing to do
@@ -102,10 +102,17 @@ public class JsonUtility<T> {
 
         for (JsonNode js : (JsonNode) nodes) {
             if (js instanceof ObjectNode)
-                nodes = (ObjectNode) js;
+                nodes = js;
             else if (js instanceof ArrayNode)
-                nodes = (ArrayNode) js;
+                nodes = js;
             fillJsonNodesValuesRec(nodes);
         }
+    }
+
+    public static String getPrettyJsonText(String jsonText) {
+        ObjectMapper mapper = new ObjectMapper();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return  gson.toJson(jsonText);
+//            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonText);
     }
 }

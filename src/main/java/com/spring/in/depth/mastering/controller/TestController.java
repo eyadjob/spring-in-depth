@@ -21,7 +21,7 @@ public class TestController {
 
     @RequestMapping(path = "/CreateCustomer/", method = RequestMethod.GET)
     public void getTest() {
-    testScenarios.test("Saudi");
+    testScenarios.CreateNewCustomer("Saudi");
 
 
 //        for (int i = 0; i < 100; i++) {

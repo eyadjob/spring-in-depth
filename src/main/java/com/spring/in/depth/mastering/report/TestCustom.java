@@ -1,10 +1,10 @@
 package com.spring.in.depth.mastering.report;
 
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.RunResult;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.gherkin.model.IGherkinFormatterModel;
 import com.aventstack.extentreports.model.*;
+import com.spring.in.depth.mastering.report.implinterface.RunResultCustom;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;

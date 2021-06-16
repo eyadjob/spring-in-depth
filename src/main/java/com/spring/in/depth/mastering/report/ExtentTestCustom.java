@@ -9,6 +9,7 @@ import com.aventstack.extentreports.gherkin.model.IGherkinFormatterModel;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.model.*;
 import com.aventstack.extentreports.utils.StringUtil;
+import com.spring.in.depth.mastering.report.implinterface.RunResultCustom;
 
 import java.io.IOException;
 import java.io.Serializable;

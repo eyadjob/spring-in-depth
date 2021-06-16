@@ -1,17 +1,18 @@
 package com.spring.in.depth.mastering.test;
 
 
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
 
+import com.relevantcodes.extentreports.ExtentReports;
 import com.spring.in.depth.mastering.pojo.ExtentReportsFactory;
-import com.spring.in.depth.mastering.report.ExtentReportsCustom;
-import com.spring.in.depth.mastering.report.ExtentTestCustom;
+import com.spring.in.depth.mastering.report.*;
+import com.spring.in.depth.mastering.report.ready.ReportManager;
 import com.spring.in.depth.mastering.service.AllGetApiServices;
 import com.spring.in.depth.mastering.service.AllPostApiService;
 import com.spring.in.depth.mastering.service.ApisData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -29,19 +30,19 @@ public class TestScenarios {
     AllGetApiServices getApiServices;
 
     @Test(groups = {"tagName", "t:another-tagName", "a:authorName", "d:deviceName"})
-    public void test(String countryName) {
+    public void CreateNewCustomer(String countryName) {
         ApisData apisData = new ApisData();
         postApiService.authenticateUser(apisData, "admin", "ejarAdmin", "123456");
         getApiServices.fillInitialData(apisData, countryName);
         getApiServices.fillVehicleData(apisData);
         getApiServices.getBranches(apisData, String.valueOf(apisData.getCountryInfo().getCountryId()), String.valueOf(false), String.valueOf(false), String.valueOf(8900), String.valueOf(8902));
-        postApiService.createNewCustomer(apisData);
+        ResponseEntity<String> response = postApiService.createNewCustomer(apisData);
         System.out.println(apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData));
+        String customerPayload = apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData).toString();
 
-         ExtentReportsFactory.createExtentHtmlReporter("Eyad first report");
-        ExtentReportsCustom extentReports = new ExtentReportsCustom();
-        ExtentTestCustom testResult = new ExtentTestCustom(extentReports, "eyad new", "eyad first report");
-        System.out.println("test");
+        ReportManager reportManager = new ReportManager("\\Ejar APIs Regression Report.html");
+        reportManager.fillStep("Create New Customer",countryName,customerPayload,response.getBody());
+        reportManager.getReport().flush();
 
     }
 }

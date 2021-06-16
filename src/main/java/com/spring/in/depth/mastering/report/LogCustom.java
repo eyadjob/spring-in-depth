@@ -2,6 +2,7 @@ package com.spring.in.depth.mastering.report;
 
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.model.*;
+import com.spring.in.depth.mastering.report.implinterface.RunResultCustom;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;
