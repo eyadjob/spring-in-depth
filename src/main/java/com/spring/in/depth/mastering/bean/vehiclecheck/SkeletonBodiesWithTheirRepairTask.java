@@ -15,7 +15,7 @@ public class SkeletonBodiesWithTheirRepairTask {
     @JsonProperty("damageName")
     private String damageName;
     @JsonProperty("repairTask")
-    private RepairTask__1 repairTask;
+    private RepairTask repairTask;
 
     @JsonProperty("skeletonBodyId")
     public Integer getSkeletonBodyId() {
@@ -68,12 +68,12 @@ public class SkeletonBodiesWithTheirRepairTask {
     }
 
     @JsonProperty("repairTask")
-    public RepairTask__1 getRepairTask() {
+    public RepairTask getRepairTask() {
         return repairTask;
     }
 
     @JsonProperty("repairTask")
-    public void setRepairTask(RepairTask__1 repairTask) {
+    public void setRepairTask(RepairTask repairTask) {
         this.repairTask = repairTask;
     }
 
