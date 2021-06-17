@@ -2,8 +2,6 @@ package com.spring.in.depth.mastering.bean.countryinfo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.spring.in.depth.mastering.bean.Branches;
-import com.spring.in.depth.mastering.bean.DefaultItemsResponseBean;
 import lombok.Data;
 
 

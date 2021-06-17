@@ -1,7 +1,9 @@
-package com.spring.in.depth.mastering.bean;
+package com.spring.in.depth.mastering.bean.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Item {
@@ -24,6 +26,43 @@ public class Item {
     private String flagId;
     @JsonProperty("id")
     private int id;
+    @JsonProperty("isActive")
+    private Boolean isActive;
+    @JsonProperty("locations")
+    private List<Location> locations = null;
+    @JsonProperty("isAirport")
+    private Boolean isAirport;
+
+    @JsonProperty("isActive")
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    @JsonProperty("isActive")
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    @JsonProperty("locations")
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    @JsonProperty("locations")
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
+    @JsonProperty("isAirport")
+    public Boolean getIsAirport() {
+        return isAirport;
+    }
+
+    @JsonProperty("isAirport")
+    public void setIsAirport(Boolean isAirport) {
+        this.isAirport = isAirport;
+    }
+
 
     @JsonProperty("number")
     public String getNumber() {

@@ -1,7 +1,8 @@
-package com.spring.in.depth.mastering.bean;
+package com.spring.in.depth.mastering.bean.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.spring.in.depth.mastering.bean.common.Item;
 
 import java.util.List;
 

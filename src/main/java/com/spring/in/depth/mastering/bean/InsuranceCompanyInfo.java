@@ -1,13 +1,8 @@
 package com.spring.in.depth.mastering.bean;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.spring.in.depth.mastering.service.ApisData;
-import com.spring.in.depth.mastering.utility.JsonUtility;
+import com.spring.in.depth.mastering.bean.common.DefaultItemsResponseBean;
 
-import java.util.Map;
-
-public class InsuranceCompanyInfo extends DefaultItemsResponseBean{
+public class InsuranceCompanyInfo extends DefaultItemsResponseBean {
 
     private String insuranceCompanyName;
     private String insuranceCompanyId;

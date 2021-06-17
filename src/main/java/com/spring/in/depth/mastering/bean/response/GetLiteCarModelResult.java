@@ -1,8 +1,8 @@
-package com.spring.in.depth.mastering.bean;
+package com.spring.in.depth.mastering.bean.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class DefaultItemsResponseBean {
+public class GetLiteCarModelResult {
 
     @JsonProperty("result")
     private Result result;
@@ -75,6 +75,57 @@ public class DefaultItemsResponseBean {
     @JsonProperty("__abp")
     public void setAbp(Boolean abp) {
         this.abp = abp;
+    }
+
+public class Result {
+
+    @JsonProperty("name")
+    private String name;
+    @JsonProperty("carCategoryId")
+    private Integer carCategoryId;
+    @JsonProperty("manufactureId")
+    private Integer manufactureId;
+    @JsonProperty("id")
+    private Integer id;
+
+    @JsonProperty("name")
+    public String getName() {
+        return name;
+    }
+
+    @JsonProperty("name")
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @JsonProperty("carCategoryId")
+    public Integer getCarCategoryId() {
+        return carCategoryId;
+    }
+
+    @JsonProperty("carCategoryId")
+    public void setCarCategoryId(Integer carCategoryId) {
+        this.carCategoryId = carCategoryId;
+    }
+
+    @JsonProperty("manufactureId")
+    public Integer getManufactureId() {
+        return manufactureId;
+    }
+
+    @JsonProperty("manufactureId")
+    public void setManufactureId(Integer manufactureId) {
+        this.manufactureId = manufactureId;
+    }
+
+    @JsonProperty("id")
+    public Integer getId() {
+        return id;
+    }
+
+    @JsonProperty("id")
+    public void setId(Integer id) {
+        this.id = id;
     }
 
 }
