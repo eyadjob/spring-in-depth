@@ -2,6 +2,7 @@ package com.spring.in.depth.mastering.service;
 
 import com.spring.in.depth.mastering.bean.AuthenticationInfo;
 import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
+import com.spring.in.depth.mastering.bean.response.BranchesComboBoxResponse;
 import com.spring.in.depth.mastering.pojo.CountryInfo;
 import com.spring.in.depth.mastering.pojo.CustomerInfo;
 import com.spring.in.depth.mastering.pojo.VehicleInfo;
@@ -13,7 +14,6 @@ import org.springframework.http.HttpHeaders;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
 @Data
 public class ApisData {
 
@@ -23,6 +23,8 @@ public class ApisData {
     private VehicleInfo vehicleInfo;
     private CustomerInfo customerInfo;
     private AuthenticationInfo authenticationInfo;
+    private BranchesComboBoxResponse branchesComboBoxResponse;
+    private String selectedBranch;
 
     public ApisData() {
         this.valuesCache = new HashMap<>();

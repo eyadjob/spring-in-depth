@@ -1,7 +1,9 @@
 package com.spring.in.depth.mastering.service;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.spring.in.depth.mastering.bean.vehicle.VehicleCreate;
 import com.spring.in.depth.mastering.pojo.CustomerInfo;
+import com.spring.in.depth.mastering.pojo.VehicleInfo;
 import com.spring.in.depth.mastering.utility.JsonUtility;
 import com.spring.in.depth.mastering.utility.PropManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +35,12 @@ public class AllPostApiService {
         ObjectNode createCustomerPayload = new CustomerInfo().getCreateCustomerReadyPayload(apisData);
         return requestApiService.requestPostAPI("api.create.customer", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(createCustomerPayload), apisData.getDefaultHeaders()));
     }
+
+    public ResponseEntity<String> createNewVehicle(ApisData apisData) {
+        ObjectNode createCustomerPayload = new CustomerInfo().getCreateCustomerReadyPayload(apisData);
+        VehicleCreate createVehiclePayload = new VehicleInfo().getCreateVehiclePayloadWithPogo(apisData);
+        return requestApiService.requestPostAPI("api.create.vehicle", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(createVehiclePayload), apisData.getDefaultHeaders()));
+    }
+
 
 }

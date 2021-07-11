@@ -1,10 +1,13 @@
 package com.spring.in.depth.mastering.bean.vehiclecheck;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.util.List;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
 public class LatestVehicleDamages {
 
     @JsonProperty("skeletonBodyDamages")
@@ -13,35 +16,5 @@ public class LatestVehicleDamages {
     private List<Object> otherDamages = null;
     @JsonProperty("checkItemLatestStatuses")
     private List<Object> checkItemLatestStatuses = null;
-
-    @JsonProperty("skeletonBodyDamages")
-    public List<Object> getSkeletonBodyDamages() {
-        return skeletonBodyDamages;
-    }
-
-    @JsonProperty("skeletonBodyDamages")
-    public void setSkeletonBodyDamages(List<Object> skeletonBodyDamages) {
-        this.skeletonBodyDamages = skeletonBodyDamages;
-    }
-
-    @JsonProperty("otherDamages")
-    public List<Object> getOtherDamages() {
-        return otherDamages;
-    }
-
-    @JsonProperty("otherDamages")
-    public void setOtherDamages(List<Object> otherDamages) {
-        this.otherDamages = otherDamages;
-    }
-
-    @JsonProperty("checkItemLatestStatuses")
-    public List<Object> getCheckItemLatestStatuses() {
-        return checkItemLatestStatuses;
-    }
-
-    @JsonProperty("checkItemLatestStatuses")
-    public void setCheckItemLatestStatuses(List<Object> checkItemLatestStatuses) {
-        this.checkItemLatestStatuses = checkItemLatestStatuses;
-    }
 
 }

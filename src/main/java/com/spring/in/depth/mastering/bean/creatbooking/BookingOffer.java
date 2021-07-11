@@ -1,7 +1,11 @@
 package com.spring.in.depth.mastering.bean.creatbooking;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
 public class BookingOffer {
 
     @JsonProperty("offerId")
@@ -11,34 +15,5 @@ public class BookingOffer {
     @JsonProperty("isCumulativeDiscountEnabled")
     private Boolean isCumulativeDiscountEnabled;
 
-    @JsonProperty("offerId")
-    public Integer getOfferId() {
-        return offerId;
-    }
-
-    @JsonProperty("offerId")
-    public void setOfferId(Integer offerId) {
-        this.offerId = offerId;
-    }
-
-    @JsonProperty("isFullPaid")
-    public Boolean getIsFullPaid() {
-        return isFullPaid;
-    }
-
-    @JsonProperty("isFullPaid")
-    public void setIsFullPaid(Boolean isFullPaid) {
-        this.isFullPaid = isFullPaid;
-    }
-
-    @JsonProperty("isCumulativeDiscountEnabled")
-    public Boolean getIsCumulativeDiscountEnabled() {
-        return isCumulativeDiscountEnabled;
-    }
-
-    @JsonProperty("isCumulativeDiscountEnabled")
-    public void setIsCumulativeDiscountEnabled(Boolean isCumulativeDiscountEnabled) {
-        this.isCumulativeDiscountEnabled = isCumulativeDiscountEnabled;
-    }
 
 }

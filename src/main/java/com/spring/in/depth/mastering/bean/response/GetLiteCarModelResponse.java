@@ -1,13 +1,12 @@
-package com.spring.in.depth.mastering.bean;
+package com.spring.in.depth.mastering.bean.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.spring.in.depth.mastering.bean.common.Result;
 import lombok.Data;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class CountryInfo {
+public class GetLiteCarModelResponse {
 
     @JsonProperty("result")
     private Result result;
@@ -22,4 +21,18 @@ public class CountryInfo {
     @JsonProperty("__abp")
     private Boolean abp;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
+    public class Result {
+
+        @JsonProperty("name")
+        private String name;
+        @JsonProperty("carCategoryId")
+        private Integer carCategoryId;
+        @JsonProperty("manufactureId")
+        private Integer manufactureId;
+        @JsonProperty("id")
+        private Integer id;
+
+    }
 }

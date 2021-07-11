@@ -14,7 +14,7 @@ public class EjarCountryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = EjarColumnsName.ID)
-    private Long id;
+    private int id;
 
     @Column(name = EjarColumnsName.Name)
     private String countryName;

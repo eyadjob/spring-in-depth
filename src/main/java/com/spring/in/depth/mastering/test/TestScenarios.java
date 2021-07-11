@@ -30,13 +30,14 @@ public class TestScenarios {
     AllGetApiServices getApiServices;
 
     @Test(groups = {"tagName", "t:another-tagName", "a:authorName", "d:deviceName"})
-    public void CreateNewCustomer(String countryName) {
+    public void CreateNewCustomer(String countryName,String branchName) {
         ApisData apisData = new ApisData();
         postApiService.authenticateUser(apisData, "admin", "ejarAdmin", "123456");
-        getApiServices.fillInitialData(apisData, countryName);
+        getApiServices.fillInitialData(apisData, countryName, branchName);
         getApiServices.fillVehicleData(apisData);
         getApiServices.getBranches(apisData, String.valueOf(apisData.getCountryInfo().getCountryId()), String.valueOf(false), String.valueOf(false), String.valueOf(8900), String.valueOf(8902));
         ResponseEntity<String> response = postApiService.createNewCustomer(apisData);
+        ResponseEntity<String> vehicleResponse =  postApiService.createNewVehicle(apisData);
         System.out.println(apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData));
         String customerPayload = apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData).toString();
 

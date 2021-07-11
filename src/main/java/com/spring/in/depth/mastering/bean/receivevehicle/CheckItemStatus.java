@@ -1,7 +1,11 @@
 package com.spring.in.depth.mastering.bean.receivevehicle;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
 public class CheckItemStatus {
 
     @JsonProperty("checklistId")
@@ -10,35 +14,5 @@ public class CheckItemStatus {
     private Integer checkItemId;
     @JsonProperty("choiceId")
     private Integer choiceId;
-
-    @JsonProperty("checklistId")
-    public Integer getChecklistId() {
-        return checklistId;
-    }
-
-    @JsonProperty("checklistId")
-    public void setChecklistId(Integer checklistId) {
-        this.checklistId = checklistId;
-    }
-
-    @JsonProperty("checkItemId")
-    public Integer getCheckItemId() {
-        return checkItemId;
-    }
-
-    @JsonProperty("checkItemId")
-    public void setCheckItemId(Integer checkItemId) {
-        this.checkItemId = checkItemId;
-    }
-
-    @JsonProperty("choiceId")
-    public Integer getChoiceId() {
-        return choiceId;
-    }
-
-    @JsonProperty("choiceId")
-    public void setChoiceId(Integer choiceId) {
-        this.choiceId = choiceId;
-    }
 
 }

@@ -1,9 +1,12 @@
 package com.spring.in.depth.mastering.bean.vehiclecheck;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.util.List;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
 public class ChecklistDetail {
 
     @JsonProperty("id")
@@ -12,36 +15,5 @@ public class ChecklistDetail {
     private String name;
     @JsonProperty("checkItems")
     private List<CheckItem> checkItems = null;
-
-    @JsonProperty("id")
-    public Integer getId() {
-        return id;
-    }
-
-    @JsonProperty("id")
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
-
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @JsonProperty("checkItems")
-    public List<CheckItem> getCheckItems() {
-        return checkItems;
-    }
-
-    @JsonProperty("checkItems")
-    public void setCheckItems(List<CheckItem> checkItems) {
-        this.checkItems = checkItems;
-    }
-
 
 }

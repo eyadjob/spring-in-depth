@@ -1,7 +1,11 @@
 package com.spring.in.depth.mastering.bean.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
 public class BillingInformation {
 
     @JsonProperty("paid")
@@ -11,34 +15,5 @@ public class BillingInformation {
     @JsonProperty("remaining")
     private Double remaining;
 
-    @JsonProperty("paid")
-    public Double getPaid() {
-        return paid;
-    }
-
-    @JsonProperty("paid")
-    public void setPaid(Double paid) {
-        this.paid = paid;
-    }
-
-    @JsonProperty("totalDueAmount")
-    public Double getTotalDueAmount() {
-        return totalDueAmount;
-    }
-
-    @JsonProperty("totalDueAmount")
-    public void setTotalDueAmount(Double totalDueAmount) {
-        this.totalDueAmount = totalDueAmount;
-    }
-
-    @JsonProperty("remaining")
-    public Double getRemaining() {
-        return remaining;
-    }
-
-    @JsonProperty("remaining")
-    public void setRemaining(Double remaining) {
-        this.remaining = remaining;
-    }
 
 }

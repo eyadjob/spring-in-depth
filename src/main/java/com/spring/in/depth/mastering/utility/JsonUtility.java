@@ -49,6 +49,19 @@ public class JsonUtility<T> {
         return jsonString;
     }
 
+    public static String getJsonStringFromObjectNode(Object object) {
+        ObjectMapper mapper = new ObjectMapper();
+        String json = null;
+        JsonNode jsonNode = null;
+        try {
+            json = new ObjectMapper().writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+
     public static String setNodesValuesAndGetJsonString(String payLoad, String... nodes) {
         ObjectNode objectNode = getObjectNodFromString(payLoad);
         for (String node : nodes) {

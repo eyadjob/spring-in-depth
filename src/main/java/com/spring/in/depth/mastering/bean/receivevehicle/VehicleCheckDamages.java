@@ -1,9 +1,12 @@
 package com.spring.in.depth.mastering.bean.receivevehicle;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import java.util.List;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
 public class VehicleCheckDamages {
 
     @JsonProperty("checkItemStatuses")
@@ -12,35 +15,5 @@ public class VehicleCheckDamages {
     private List<Object> skeletonBodyDamages = null;
     @JsonProperty("otherDamages")
     private List<Object> otherDamages = null;
-
-    @JsonProperty("checkItemStatuses")
-    public List<CheckItemStatus> getCheckItemStatuses() {
-        return checkItemStatuses;
-    }
-
-    @JsonProperty("checkItemStatuses")
-    public void setCheckItemStatuses(List<CheckItemStatus> checkItemStatuses) {
-        this.checkItemStatuses = checkItemStatuses;
-    }
-
-    @JsonProperty("skeletonBodyDamages")
-    public List<Object> getSkeletonBodyDamages() {
-        return skeletonBodyDamages;
-    }
-
-    @JsonProperty("skeletonBodyDamages")
-    public void setSkeletonBodyDamages(List<Object> skeletonBodyDamages) {
-        this.skeletonBodyDamages = skeletonBodyDamages;
-    }
-
-    @JsonProperty("otherDamages")
-    public List<Object> getOtherDamages() {
-        return otherDamages;
-    }
-
-    @JsonProperty("otherDamages")
-    public void setOtherDamages(List<Object> otherDamages) {
-        this.otherDamages = otherDamages;
-    }
 
 }

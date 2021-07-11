@@ -21,7 +21,7 @@ public class CustomerInfo {
         String currentTime = String.valueOf(new Date().getTime());
         this.customerNumber =  currentTime.substring(2, currentTime.length() - 1);
         this.phoneNumber = "966-51" + currentTime.substring(5, currentTime.length() - 1);
-        this.firstName =  "FromEyadApiTestFrameworkPerfFN" + customerNumber;
+        this.firstName =  "EyadApiTestFrameworkPayaPay" + customerNumber;
         this.secondName =  "perSN" + customerNumber;
         this.LastName = "perLN" + customerNumber;
         this.email = "perfTest" + customerNumber + "@iyelo.com";

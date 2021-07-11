@@ -1,9 +1,10 @@
 package com.spring.in.depth.mastering.service;
 
-import com.spring.in.depth.mastering.bean.Branches;
+import com.spring.in.depth.mastering.bean.BranchesInfo;
 import com.spring.in.depth.mastering.bean.FuelTypes;
 import com.spring.in.depth.mastering.bean.InsuranceCompanies;
 import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
+import com.spring.in.depth.mastering.bean.response.BranchesComboBoxResponse;
 import com.spring.in.depth.mastering.entity.ejar.stg.EjarCountryEntity;
 import com.spring.in.depth.mastering.repository.ejar.stg.EjarCountryRepository;
 import lombok.Data;
@@ -30,6 +31,15 @@ public class AllGetApiServices {
         return apisData;
     }
 
+    public ApisData fillInitialData(ApisData apisData, String countryName,String branchName) {
+        getCountryInfoByName(apisData, countryName);
+        getCountryCurrencyInfo(apisData);
+        getCountryBranch(apisData,branchName,false);
+        getInsuranceCompany(apisData, false);
+        return apisData;
+    }
+
+
     public ApisData fillVehicleData(ApisData apisData) {
         FuelTypes fuelTypes = (FuelTypes) requestApiService.requestExchangeAPI(FuelTypes.class, apisData.buildHttpEntity(), "api.GetFuelTypes", "countryId=" + apisData.getCountryInfo().getCountryId(), "includeActive=" + false, "isSelectedId=" + -1).getBody();
         apisData.getVehicleInfo().setFuelTypes(fuelTypes);
@@ -49,15 +59,22 @@ public class AllGetApiServices {
         return apisData;
     }
 
-    public ApisData getInsuranceCompany(ApisData apisData, boolean includeActive) {
-        InsuranceCompanies insuranceCompanies = (InsuranceCompanies) requestApiService.requestExchangeAPI(InsuranceCompanies.class, apisData.buildHttpEntity(), "api.GetInsuranceCompany", "countryId=" + apisData.getCountryInfo().getCountryId(), "includeActive=" + includeActive).getBody();
+    public ApisData getCountryBranch(ApisData apisData, boolean includeActive) {
+        InsuranceCompanies insuranceCompanies = (InsuranceCompanies) requestApiService.requestExchangeAPI(InsuranceCompanies.class, apisData.buildHttpEntity(), "api.GetBranches", "countryId=" + apisData.getCountryInfo().getCountryId(), "includeActive=" + includeActive).getBody();
         apisData.getVehicleInfo().setInsuranceCompanies(insuranceCompanies);
         return apisData;
     }
 
 
-    public ApisData getBranches(ApisData apisData, String... params) {
-        apisData.getCountryInfo().setBranchesList((Branches) requestApiService.requestExchangeAPI(Branches.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + params[0], "includeInActive=" + params[1], "includeAll=" + params[2], "filterTypes=" + params[3], "filterTypes=" + params[4]).getBody());
+    public ApisData getInsuranceCompany(ApisData apisData,  boolean includeActive) {
+        InsuranceCompanies insuranceCompanies = (InsuranceCompanies) requestApiService.requestExchangeAPI(InsuranceCompanies.class, apisData.buildHttpEntity(), "api.GetInsuranceCompany", "countryId=" + apisData.getCountryInfo().getCountryId(), "includeActive=" + includeActive).getBody();
+        apisData.getVehicleInfo().setInsuranceCompanies(insuranceCompanies);
+        return apisData;
+    }
+
+    public ApisData getBranches(ApisData apisData,String branchName, String... params) {
+        apisData.setBranchesComboBoxResponse((BranchesComboBoxResponse) requestApiService.requestExchangeAPI(BranchesInfo.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + params[0], "includeInActive=" + params[1], "includeAll=" + params[2], "filterTypes=" + params[3], "filterTypes=" + params[4]).getBody());
+        apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchId();
         return apisData;
     }
 

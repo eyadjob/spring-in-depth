@@ -6,8 +6,6 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.spring.in.depth.mastering.utility.JsonUtility;
 import lombok.Data;
-
-
 @Data
 public class ReportManager {
 
