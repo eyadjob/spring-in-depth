@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 public class OutputService {
     @Value("${app.name}")
-    private final String name;
+    private String name;
 
     private TimeService timeService;
     private GreetingService greetingService;

@@ -15,8 +15,8 @@ import java.io.OutputStream;
 @Configuration
 @PropertySource("application.properties")
 public class ApplicationConfig {
-    @Autowired
-    private GreetingService greetingService;
+//    @Autowired
+//    private GreetingService greetingService;
 
     @Autowired
     private TimeService timeService;
@@ -34,15 +34,15 @@ public class ApplicationConfig {
         return new TimeService(false);
     }
 
-    @Bean
-    public OutputService outputService() {
-        return new OutputService(greetingService, timeService,name);
-    }
-
-    @Bean
-    public GreetingService greetingService() {
-        return new GreetingService(greeting);
-    }
+//    @Bean
+//    public OutputService outputService() {
+//        return new OutputService(greetingService, timeService);
+//    }
+//
+//    @Bean
+//    public GreetingService greetingService() {
+//        return new GreetingService();
+//    }
 }
 
 
