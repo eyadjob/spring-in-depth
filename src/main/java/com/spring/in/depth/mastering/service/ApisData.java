@@ -1,19 +1,24 @@
 package com.spring.in.depth.mastering.service;
 
 import com.spring.in.depth.mastering.bean.AuthenticationInfo;
-import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
+import com.spring.in.depth.mastering.bean.post.UploadFile;
+import com.spring.in.depth.mastering.bean.receivevehicle.ReceiveVehicle;
 import com.spring.in.depth.mastering.bean.response.BranchesComboBoxResponse;
+import com.spring.in.depth.mastering.bean.response.GetAllBranchVehicles;
+import com.spring.in.depth.mastering.bean.response.UploadFileResponse;
+import com.spring.in.depth.mastering.bean.vehicle.VehicleCreate;
+import com.spring.in.depth.mastering.bean.response.VehicleCheckPreparationDataResponse;
 import com.spring.in.depth.mastering.pojo.CountryInfo;
 import com.spring.in.depth.mastering.pojo.CustomerInfo;
+import com.spring.in.depth.mastering.pojo.ReceiveNewVehicleInfo;
 import com.spring.in.depth.mastering.pojo.VehicleInfo;
 import com.spring.in.depth.mastering.utility.PropManager;
 import lombok.Data;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
+
 @Data
 public class ApisData {
 
@@ -24,7 +29,16 @@ public class ApisData {
     private CustomerInfo customerInfo;
     private AuthenticationInfo authenticationInfo;
     private BranchesComboBoxResponse branchesComboBoxResponse;
-    private String selectedBranch;
+    private String selectedBranchId;
+    private String selectedBranchName;
+    private VehicleCreate vehicleCreate;
+    private VehicleCheckPreparationDataResponse vehicleCheckPreparationDataResponse;
+    private GetAllBranchVehicles getAllBranchVehicles;
+    private UploadFile uploadFile;
+    private List<UploadFileResponse> uploadFileResponse = new ArrayList<>();
+    private ReceiveVehicle receiveVehicle;
+
+
 
     public ApisData() {
         this.valuesCache = new HashMap<>();

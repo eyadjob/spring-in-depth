@@ -1,8 +1,12 @@
 package com.spring.in.depth.mastering.service;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.spring.in.depth.mastering.bean.post.UploadFile;
+import com.spring.in.depth.mastering.bean.receivevehicle.ReceiveVehicle;
+import com.spring.in.depth.mastering.bean.response.UploadFileResponse;
 import com.spring.in.depth.mastering.bean.vehicle.VehicleCreate;
 import com.spring.in.depth.mastering.pojo.CustomerInfo;
+import com.spring.in.depth.mastering.pojo.ReceiveNewVehicleInfo;
 import com.spring.in.depth.mastering.pojo.VehicleInfo;
 import com.spring.in.depth.mastering.utility.JsonUtility;
 import com.spring.in.depth.mastering.utility.PropManager;
@@ -37,10 +41,24 @@ public class AllPostApiService {
     }
 
     public ResponseEntity<String> createNewVehicle(ApisData apisData) {
-        ObjectNode createCustomerPayload = new CustomerInfo().getCreateCustomerReadyPayload(apisData);
         VehicleCreate createVehiclePayload = new VehicleInfo().getCreateVehiclePayloadWithPogo(apisData);
+        apisData.setVehicleCreate(createVehiclePayload);
         return requestApiService.requestPostAPI("api.create.vehicle", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(createVehiclePayload), apisData.getDefaultHeaders()));
     }
 
+    public ResponseEntity<String> ReceiveNewVehicle(ApisData apisData) {
+        ReceiveVehicle receiveNewVehicleInfo = new ReceiveNewVehicleInfo().getReceiveNewVehicleInfo(apisData);
+        apisData.setReceiveVehicle(receiveNewVehicleInfo);
+        return requestApiService.requestPostAPI("api.receive.new.vehicle", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(receiveNewVehicleInfo), apisData.getDefaultHeaders()));
+    }
+    public ResponseEntity<Object> uploadFile(ApisData apisData,String fileName) {
+        UploadFile uploadFile = new UploadFile();
+        apisData.setUploadFile(uploadFile);
+        ResponseEntity<Object> response = requestApiService.requestPostAPI("api.UploadBase64File", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(uploadFile), apisData.getDefaultHeaders()), UploadFile.class);
+        UploadFileResponse uploadFileResponse = (UploadFileResponse) response.getBody();
+        uploadFileResponse.setNameOfFile(fileName);
+        apisData.getUploadFileResponse().add(uploadFileResponse);
+        return response;
+    }
 
 }

@@ -111,6 +111,8 @@ public class VehicleCreate {
             @JsonProperty("plateNo")
             public String plateNo;
 
+
+
         }
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -123,4 +125,10 @@ public class VehicleCreate {
 
         }
     }
+
+    public  String getPlateNumberForAngular() {
+        StringBuilder pnk = new StringBuilder(this.vehicleDtos.get(0).vehicleLicenseInfo.getPlateNo());
+        return pnk.insert(0, "%27").append("%27").toString().replaceAll(" ", "%2520");
+    }
+
 }

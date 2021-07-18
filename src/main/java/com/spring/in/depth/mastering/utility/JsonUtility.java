@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 public class JsonUtility<T> {
 
 
-    public static Object getJsonFromString(String inputString) {
+    public static Object getJsonObjectFromString(String inputString, Class objectClass) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            Object jsonObject = objectMapper.readValue(inputString, Object.class);
+            Object jsonObject = objectMapper.readValue(inputString, objectClass);
             return jsonObject;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
