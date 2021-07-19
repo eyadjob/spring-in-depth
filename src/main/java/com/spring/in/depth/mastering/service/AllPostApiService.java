@@ -54,10 +54,14 @@ public class AllPostApiService {
     public ResponseEntity<Object> uploadFile(ApisData apisData,String fileName) {
         UploadFile uploadFile = new UploadFile();
         apisData.setUploadFile(uploadFile);
-        ResponseEntity<Object> response = requestApiService.requestPostAPI("api.UploadBase64File", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(uploadFile), apisData.getDefaultHeaders()), UploadFile.class);
+        apisData.getDefaultHeaders().remove("Accept");
+        apisData.getDefaultHeaders().remove("Content-Length");
+        requestApiService.requestPostByJava(UploadFile.class, apisData.buildHttpEntity(uploadFile.getData(), apisData.getDefaultHeaders()),"api.UploadBase64File");
+        ResponseEntity<Object> response = requestApiService.requestPostAPI("api.UploadBase64File", apisData.buildHttpEntity(uploadFile.getData(), apisData.getDefaultHeaders()), UploadFile.class);
         UploadFileResponse uploadFileResponse = (UploadFileResponse) response.getBody();
         uploadFileResponse.setNameOfFile(fileName);
         apisData.getUploadFileResponse().add(uploadFileResponse);
+        apisData.getDefaultHeaders().add("Accept", "application/jso");
         return response;
     }
 

@@ -4,6 +4,7 @@ import com.spring.in.depth.mastering.utility.JsonUtility;
 import com.spring.in.depth.mastering.utility.PropManager;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -73,6 +74,23 @@ public class RequestApiService {
             org.apache.http.HttpEntity entity = response.getEntity();
             String output = convertStreamToString(entity.getContent());
          return JsonUtility.getJsonObjectFromString(output,className);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object requestPostByJava(Class className, HttpEntity<String> httpEntity, String apiNameKey, String... queryParams) {
+        String uri = buildGetUri(PropManager.getInstance().getProperty("env.url") + PropManager.getInstance().getProperty(apiNameKey), queryParams);
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpPost httpGet = new HttpPost(uri);
+        buildHeaderForNormalJavaRequest(httpGet,httpEntity);
+        CloseableHttpResponse response = null;
+        try {
+            response = httpclient.execute(httpGet);
+            org.apache.http.HttpEntity entity = response.getEntity();
+            String output = convertStreamToString(entity.getContent());
+            return JsonUtility.getJsonObjectFromString(output,className);
         } catch (IOException e) {
             e.printStackTrace();
         }

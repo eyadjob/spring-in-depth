@@ -79,7 +79,7 @@ public class ApisData {
         HttpHeaders headers = new HttpHeaders();
         for (Map.Entry<String, Properties> p : PropManager.getInstance().getPropertiesValues().entrySet()) {
             if (p.getKey().contains("default.headers")) {
-                p.getValue().entrySet().forEach(prop -> headers.set((String) prop.getKey(), (String) prop.getValue()));
+                p.getValue().entrySet().forEach(prop -> headers.set( prop.getKey().toString().trim(), ((String) prop.getValue()).trim()));
             }
         }
         return headers;
