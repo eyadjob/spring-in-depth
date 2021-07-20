@@ -4,6 +4,7 @@ import com.spring.in.depth.mastering.bean.FuelTypes;
 import com.spring.in.depth.mastering.bean.InsuranceCompanies;
 import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
 import com.spring.in.depth.mastering.bean.response.BranchesComboBoxResponse;
+import com.spring.in.depth.mastering.bean.response.CreateBookingDateInputsResponse;
 import com.spring.in.depth.mastering.bean.response.GetAllBranchVehicles;
 import com.spring.in.depth.mastering.bean.response.VehicleCheckPreparationDataResponse;
 import com.spring.in.depth.mastering.entity.ejar.stg.EjarCountryEntity;
@@ -80,6 +81,11 @@ public class AllGetApiServices {
         apisData.setSelectedBranchName(branchName);
         return apisData;
     }
+    public ApisData getCreateBookingDateInputs(ApisData apisData) {
+        apisData.setCreateBookingDateInputsResponse((CreateBookingDateInputsResponse) requestApiService.requestExchangeAPI(CreateBookingDateInputsResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetCreateBookingDateInputs", "countryId=" + apisData.getCountryInfo().getCountryId()).getBody());
+        return apisData;
+    }
+
 
     public ApisData getVehicleCheckPreparationData(ApisData apisData) {
        apisData.getVehicleInfo().setId( apisData.getGetAllBranchVehicles().getResult().getData().stream().filter(d -> d.getPlateNo().contains(apisData.getVehicleCreate().getVehicleDtos().get(0).getVehicleLicenseInfo().getPlateNo())).findFirst().get().getId());

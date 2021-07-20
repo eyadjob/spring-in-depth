@@ -1,16 +1,13 @@
 package com.spring.in.depth.mastering.service;
 
 import com.spring.in.depth.mastering.bean.AuthenticationInfo;
+import com.spring.in.depth.mastering.bean.post.BookingCalculateBillingInformation;
 import com.spring.in.depth.mastering.bean.post.UploadFile;
 import com.spring.in.depth.mastering.bean.receivevehicle.ReceiveVehicle;
-import com.spring.in.depth.mastering.bean.response.BranchesComboBoxResponse;
-import com.spring.in.depth.mastering.bean.response.GetAllBranchVehicles;
-import com.spring.in.depth.mastering.bean.response.UploadFileResponse;
+import com.spring.in.depth.mastering.bean.response.*;
 import com.spring.in.depth.mastering.bean.vehicle.VehicleCreate;
-import com.spring.in.depth.mastering.bean.response.VehicleCheckPreparationDataResponse;
 import com.spring.in.depth.mastering.pojo.CountryInfo;
 import com.spring.in.depth.mastering.pojo.CustomerInfo;
-import com.spring.in.depth.mastering.pojo.ReceiveNewVehicleInfo;
 import com.spring.in.depth.mastering.pojo.VehicleInfo;
 import com.spring.in.depth.mastering.utility.PropManager;
 import lombok.Data;
@@ -27,6 +24,7 @@ public class ApisData {
     private CountryInfo countryInfo;
     private VehicleInfo vehicleInfo;
     private CustomerInfo customerInfo;
+    private CreateCustomerResponse createCustomerResponse;
     private AuthenticationInfo authenticationInfo;
     private BranchesComboBoxResponse branchesComboBoxResponse;
     private String selectedBranchId;
@@ -37,6 +35,9 @@ public class ApisData {
     private UploadFile uploadFile;
     private List<UploadFileResponse> uploadFileResponse = new ArrayList<>();
     private ReceiveVehicle receiveVehicle;
+    private CreateBookingDateInputsResponse createBookingDateInputsResponse;
+    private BookingCalculateBillingInformation bookingCalculateBillingInformation;
+    private CalculateBillingInformationResponse calculateBillingInformationResponse;
 
 
 
@@ -51,6 +52,9 @@ public class ApisData {
 
     public HttpEntity<String> buildHttpEntity(String jsonPayload, HttpHeaders headers) {
         return new HttpEntity<>(jsonPayload, headers);
+    }
+    public HttpEntity<Object> buildHttpEntity(Object jsonPayload, HttpHeaders headers) {
+        return new HttpEntity<Object>(jsonPayload, headers);
     }
 
     public HttpEntity<String> buildHttpEntity(String jsonPayload) {
