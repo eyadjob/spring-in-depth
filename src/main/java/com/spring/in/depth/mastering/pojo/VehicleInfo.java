@@ -28,6 +28,8 @@ public class VehicleInfo {
     private FuelTypes fuelTypes;
     private InsuranceCompanies insuranceCompanies = new InsuranceCompanies();
     private String angularPlateNumber;
+    private int id;
+    private int fuelId;
 
 
     public VehicleInfo() {
@@ -52,38 +54,12 @@ public class VehicleInfo {
         return angularPlateNumber;
     }
 
-//    public ObjectNode getCreateVehiclePayload(ApisData apisData) {
-//
-//        ObjectNode vehiclePayload = JsonUtility.getObjectNodFromString(PropManager.getInstance().getProperty("api.create.vehicle.post.payload"));
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos")).put("odometer", "22");
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos")).put("fuelId", 208);
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos")).put("branchId", apisData.getCountryInfo().getSelectedBranch());
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos").get("vehicleManufacturingInfo")).put("modelId", 107);
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos").get("vehicleManufacturingInfo")).put("year", 2021);
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos").get("vehicleManufacturingInfo")).put("chassisNo", chassisNumber);
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos").get("vehicleLicenseInfo")).put("licenseTypeId", 181);
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos").get("vehicleLicenseInfo")).put("usageTypeId", "190");
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos").get("vehicleLicenseInfo")).put("plateNo", plateNumber);
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos").get("vehicleInsuranceInfo")).put("insuranceCompanyId", insuranceCompanies.getResult().getItems().get(1).getValue();
-//
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos").get("basicInformation")).put("nationalityId", apisData.getCountryInfo().getCountryId());
-//        ((ObjectNode) vehiclePayload.get("vehicleDtos").get("address")).put("countryId", apisData.getCountryInfo().getCountryId());
-//        JsonUtility.fillJsonArraysNodes((ArrayNode) vehiclePayload.get("customer").get("documents"),"0:issueCountryId:1","1:issueCountryId:1");
-//        JsonUtility.fillJsonArraysNodes((ArrayNode) vehiclePayload.get("customer").get("documents"),"0:typeId:250","1:typeId:250");
-//        JsonUtility.fillJsonArraysNodes((ArrayNode) vehiclePayload.get("customer").get("documents"),"0:number:"+customerNumber,"1:number:"+customerNumber);
-//        JsonUtility.fillJsonArraysNodes((ArrayNode) vehiclePayload.get("customer").get("documents"),"0:typeName:Identity","1:typeName:Identity");
-//        String countryName =apisData.getCountryInfo().getCountryName();
-//        JsonUtility.fillJsonArraysNodes((ArrayNode) vehiclePayload.get("customer").get("documents"),"0:issueCountry:"+countryName,"1:issueCountry:"+countryName);
-//        vehiclePayload.put("sourceId", 120);
-//        return vehiclePayload;
-//    }
-
-
     public VehicleCreate getCreateVehiclePayloadWithPogo(ApisData apisData) {
         VehicleCreate vehicleCreatePayload = new VehicleCreate();
         vehicleCreatePayload.getVehicleDtos().get(0).setOdometer("22");
         vehicleCreatePayload.getVehicleDtos().get(0).setFuelId(208);
-        vehicleCreatePayload.getVehicleDtos().get(0).setBranchId(apisData.getCountryInfo().getSelectedBranch());
+        vehicleCreatePayload.getVehicleDtos().get(0).setBranchId(apisData.getSelectedBranchId());
+        vehicleCreatePayload.getVehicleDtos().get(0).getLocationInfo().setCurrentLocationId(apisData.getSelectedBranchId());
         vehicleCreatePayload.getVehicleDtos().get(0).getVehicleManufacturingInfo().setModelId("107");
         vehicleCreatePayload.getVehicleDtos().get(0).getVehicleManufacturingInfo().setYear(2021);
         vehicleCreatePayload.getVehicleDtos().get(0).getVehicleManufacturingInfo().setChassisNo(chassisNumber);

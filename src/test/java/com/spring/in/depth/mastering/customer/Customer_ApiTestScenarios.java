@@ -37,7 +37,7 @@ public class Customer_ApiTestScenarios {
 
     @Test
     public void CreateCustomer() {
-        testScenarios.CreateNewCustomer("Saudi");
+        testScenarios.CreateNewCustomer("Saudi","Abha Airport" );
 
     }
 

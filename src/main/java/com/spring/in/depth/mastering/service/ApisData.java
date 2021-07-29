@@ -1,8 +1,11 @@
 package com.spring.in.depth.mastering.service;
 
 import com.spring.in.depth.mastering.bean.AuthenticationInfo;
-import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
-import com.spring.in.depth.mastering.bean.response.BranchesComboBoxResponse;
+import com.spring.in.depth.mastering.bean.post.BookingCalculateBillingInformation;
+import com.spring.in.depth.mastering.bean.post.UploadFile;
+import com.spring.in.depth.mastering.bean.receivevehicle.ReceiveVehicle;
+import com.spring.in.depth.mastering.bean.response.*;
+import com.spring.in.depth.mastering.bean.vehicle.VehicleCreate;
 import com.spring.in.depth.mastering.pojo.CountryInfo;
 import com.spring.in.depth.mastering.pojo.CustomerInfo;
 import com.spring.in.depth.mastering.pojo.VehicleInfo;
@@ -11,9 +14,8 @@ import lombok.Data;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
+
 @Data
 public class ApisData {
 
@@ -22,9 +24,22 @@ public class ApisData {
     private CountryInfo countryInfo;
     private VehicleInfo vehicleInfo;
     private CustomerInfo customerInfo;
+    private CreateCustomerResponse createCustomerResponse;
     private AuthenticationInfo authenticationInfo;
     private BranchesComboBoxResponse branchesComboBoxResponse;
-    private String selectedBranch;
+    private String selectedBranchId;
+    private String selectedBranchName;
+    private VehicleCreate vehicleCreate;
+    private VehicleCheckPreparationDataResponse vehicleCheckPreparationDataResponse;
+    private GetAllBranchVehicles getAllBranchVehicles;
+    private UploadFile uploadFile;
+    private List<UploadFileResponse> uploadFileResponse = new ArrayList<>();
+    private ReceiveVehicle receiveVehicle;
+    private CreateBookingDateInputsResponse createBookingDateInputsResponse;
+    private BookingCalculateBillingInformation bookingCalculateBillingInformation;
+    private CalculateBillingInformationResponse calculateBillingInformationResponse;
+
+
 
     public ApisData() {
         this.valuesCache = new HashMap<>();
@@ -37,6 +52,9 @@ public class ApisData {
 
     public HttpEntity<String> buildHttpEntity(String jsonPayload, HttpHeaders headers) {
         return new HttpEntity<>(jsonPayload, headers);
+    }
+    public HttpEntity<Object> buildHttpEntity(Object jsonPayload, HttpHeaders headers) {
+        return new HttpEntity<Object>(jsonPayload, headers);
     }
 
     public HttpEntity<String> buildHttpEntity(String jsonPayload) {
@@ -65,7 +83,7 @@ public class ApisData {
         HttpHeaders headers = new HttpHeaders();
         for (Map.Entry<String, Properties> p : PropManager.getInstance().getPropertiesValues().entrySet()) {
             if (p.getKey().contains("default.headers")) {
-                p.getValue().entrySet().forEach(prop -> headers.set((String) prop.getKey(), (String) prop.getValue()));
+                p.getValue().entrySet().forEach(prop -> headers.set( prop.getKey().toString().trim(), ((String) prop.getValue()).trim()));
             }
         }
         return headers;
