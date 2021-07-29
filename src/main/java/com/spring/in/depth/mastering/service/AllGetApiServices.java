@@ -1,5 +1,6 @@
 package com.spring.in.depth.mastering.service;
 
+import com.spring.in.depth.mastering.bean.BranchesInfo;
 import com.spring.in.depth.mastering.bean.FuelTypes;
 import com.spring.in.depth.mastering.bean.InsuranceCompanies;
 import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
@@ -36,7 +37,7 @@ public class AllGetApiServices {
     public ApisData fillInitialData(ApisData apisData, String countryName,String branchName) {
         getCountryInfoByName(apisData, countryName);
         getCountryCurrencyInfo(apisData);
-        getBranches(apisData,branchName,false);
+        getCountryBranch(apisData,false);
         getInsuranceCompany(apisData, false);
         return apisData;
     }
@@ -74,30 +75,21 @@ public class AllGetApiServices {
         return apisData;
     }
 
-    public ApisData getBranches(ApisData apisData,String branchName, boolean  includeInActive) {
-        apisData.setBranchesComboBoxResponse((BranchesComboBoxResponse) requestApiService.requestExchangeAPI(BranchesComboBoxResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + apisData.getCountryInfo().getCountryId(), "includeInActive=" + includeInActive, "includeAll=false" ).getBody());
-        String  branchValue = apisData.getBranchesComboBoxResponse().getResult().getItems().stream().filter(b -> b.getDisplayText().contains(branchName)).findFirst().get().getValue();
-        apisData.setSelectedBranchId(branchValue);
-        apisData.setSelectedBranchName(branchName);
+    public ApisData getBranches(ApisData apisData,String countryId, String branchName, String... params) {
+        apisData.setBranchesComboBoxResponse((BranchesComboBoxResponse) requestApiService.requestExchangeAPI(BranchesComboBoxResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + countryId, "includeInActive=" + params[0]).getBody());
+        apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchId(apisData.getBranchesComboBoxResponse().getResult().getItems().stream().filter(b -> b.getDisplayText().contains(branchName)).findFirst().get().getValue());
+        apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchName(branchName);
         return apisData;
     }
+
     public ApisData getCreateBookingDateInputs(ApisData apisData) {
         apisData.setCreateBookingDateInputsResponse((CreateBookingDateInputsResponse) requestApiService.requestExchangeAPI(CreateBookingDateInputsResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetCreateBookingDateInputs", "countryId=" + apisData.getCountryInfo().getCountryId()).getBody());
         return apisData;
     }
 
-
-    public ApisData getVehicleCheckPreparationData(ApisData apisData) {
-       apisData.getVehicleInfo().setId( apisData.getGetAllBranchVehicles().getResult().getData().stream().filter(d -> d.getPlateNo().contains(apisData.getVehicleCreate().getVehicleDtos().get(0).getVehicleLicenseInfo().getPlateNo())).findFirst().get().getId());
-        apisData.getVehicleInfo().setFuelId( apisData.getGetAllBranchVehicles().getResult().getData().stream().filter(d -> d.getPlateNo().contains(apisData.getVehicleCreate().getVehicleDtos().get(0).getVehicleLicenseInfo().getPlateNo())).findFirst().get().getFuelId());
-        apisData.setVehicleCheckPreparationDataResponse((VehicleCheckPreparationDataResponse) requestApiService.requestExchangeAPI(VehicleCheckPreparationDataResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetVehicleCheckPreparationData", "VehicleId=" + apisData.getVehicleInfo().getId(), "CheckTypeId=" + 6 ).getBody());
+    public ApisData getVehiclePreparationData(ApisData apisData) {
+        apisData.setVehicleCheckPreparationDataResponse((VehicleCheckPreparationDataResponse) requestApiService.requestExchangeAPI(VehicleCheckPreparationDataResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetVehicleCheckPreparationData", "VehicleId=" + apisData.getVehicleInfo().getId() , "CheckTypeId=6").getBody());
         return apisData;
     }
-    public ApisData getAllBranchVehicles(ApisData apisData) {
-        System.out.println("Request=page%3D1%26pageSize%3D15%26sort%3DlastModificationTime-desc%26filter%3D(countryId~eq~"+apisData.getCountryInfo().getCountryId()+"~and~currentLocationId~eq~"+apisData.getSelectedBranchId()+"~and~plateNo~contains~"+ apisData.getVehicleCreate().getPlateNumberForAngular()+")");
-        apisData.setGetAllBranchVehicles((GetAllBranchVehicles) requestApiService.requestGetByJava(GetAllBranchVehicles.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetAllBranchVehicles", "Request=page%3D1%26pageSize%3D15%26sort%3DlastModificationTime-desc%26filter%3D(countryId~eq~"+apisData.getCountryInfo().getCountryId()+"~and~currentLocationId~eq~"+apisData.getSelectedBranchId()+"~and~plateNo~contains~"+ apisData.getVehicleCreate().getPlateNumberForAngular()+")"));
-        return apisData;
-    }
-
 
 }

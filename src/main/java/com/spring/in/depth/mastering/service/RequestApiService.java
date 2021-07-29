@@ -170,30 +170,12 @@ public class RequestApiService {
         }
         return null;
     }
-
-    public Object requestPostByJava(Class className,Object object, HttpEntity<String> httpEntity, String apiNameKey, String... queryParams) {
+    public ResponseEntity<String> requestExchangeAPIAndReturnJsonString(Class className, HttpEntity<String> httpEntity, String apiNameKey, String... queryParams) {
         String uri = buildGetUri(PropManager.getInstance().getProperty("env.url") + PropManager.getInstance().getProperty(apiNameKey), queryParams);
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost httpGet = new HttpPost(uri);
-        buildHeaderForNormalJavaRequest(httpGet, httpEntity);
-        HttpResponse response = null;
-        StringEntity requestEntity = new StringEntity(
-                JsonUtility.getJsonStringFromObjectNode(object),
-                ContentType.APPLICATION_JSON);
-        try {
-            for (Map.Entry<String,List<String>> v : httpEntity.getHeaders().entrySet()) {
-                httpGet.setHeader(v.getKey(),v.getValue().get(0));
-            }
-            httpGet.setEntity(requestEntity);
-            response = httpclient.execute(httpGet);
-            org.apache.http.HttpEntity entity = response.getEntity();
-            String output = convertStreamToString(entity.getContent());
-            return JsonUtility.getJsonObjectFromString(output, className);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return new RestTemplate().exchange( uri, HttpMethod.GET, httpEntity, className);
     }
+
+
 
     public Object requestPostEncode64ByJava(Class className, HttpEntity<String> httpEntity, String apiNameKey, String... queryParams) {
 

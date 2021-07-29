@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class BranchesComboBoxResponse {
 
-
+    private SelectedBranch selectedBranch = new SelectedBranch();
 
     @JsonProperty("result")
     private Result result;
@@ -77,6 +77,7 @@ public class BranchesComboBoxResponse {
             this.branchId = branchId;
 
         }
+
         @JsonIgnore
         String branchId;
         @JsonIgnore

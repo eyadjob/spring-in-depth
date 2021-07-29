@@ -32,21 +32,25 @@ public class TestScenarios {
         postApiService.authenticateUser(apisData, "admin", "ejarAdmin", "123456");
         getApiServices.fillInitialData(apisData, countryName, branchName);
         getApiServices.fillVehicleData(apisData);
-        getApiServices.getBranches(apisData,branchName, false);
+        getApiServices.getBranches(apisData, String.valueOf(apisData.getCountryInfo().getCountryId()),branchName, String.valueOf(false), String.valueOf(false), String.valueOf(8900), String.valueOf(8902));
         postApiService.createNewCustomer(apisData);
         postApiService.createNewVehicle(apisData);
         System.out.println(apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData));
         System.out.println(apisData.getVehicleInfo().getCreateVehiclePayloadWithPogo(apisData));
-        getApiServices.getAllBranchVehicles(apisData);
-        getApiServices.getVehicleCheckPreparationData(apisData);
-//        postApiService.uploadFile(apisData,"signature");
+        System.out.println(apisData.getVehicleInfo().getCreateVehiclePayloadWithPogo(apisData));
+
+        getApiServices.getVehiclePreparationData(apisData);
+        System.out.println(apisData.getVehicleCheckPreparationDataResponse().toString());
+        postApiService.uploadFile(apisData,"signature");
+        postApiService.ReceiveNewVehicle(apisData);
+        System.out.println(apisData.getReceiveVehicle().toString());
 //        postApiService.uploadFile(apisData,"first car image");
 //        postApiService.uploadFile(apisData,"secondCarImage");
 //        System.out.println(apisData.getVehicleInfo().getCreateVehiclePayloadWithPogo(apisData));
-//        postApiService.ReceiveNewVehicle(apisData);
-        getApiServices.getCreateBookingDateInputs(apisData);
-        postApiService.createCalculateBillingInformationForBooking(apisData);
-        System.out.println(apisData.getCalculateBillingInformationResponse());
+
+//        getApiServices.getCreateBookingDateInputs(apisData);
+//        postApiService.createCalculateBillingInformationForBooking(apisData);
+//        System.out.println(apisData.getCalculateBillingInformationResponse());
 //        System.out.println(apisData.getVehicleCheckPreparationDataResponse());
 //        String customerPayload = apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData).toString();
 //        ReportManager reportManager = new ReportManager("\\Ejar APIs Regression Report.html");
