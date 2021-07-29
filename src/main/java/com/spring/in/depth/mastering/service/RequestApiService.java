@@ -176,16 +176,6 @@ public class RequestApiService {
     }
 
 
-    public String buildGetUri(String url, String... params) {
-        StringBuilder getUri = new StringBuilder(url);
-        for (int i = 0; i < params.length; i++) {
-            if (i == 0)
-                getUri.append("?").append(params[i]);
-            else
-                getUri.append("&").append(params[i]);
-        }
-        return null;
-    }
 
     public Object requestPostEncode64ByJava(Class className, HttpEntity<String> httpEntity, String apiNameKey, String... queryParams) {
 

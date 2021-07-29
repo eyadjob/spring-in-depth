@@ -57,17 +57,17 @@ public class AllPostApiService {
         return requestApiService.requestPostAPI("api.create.vehicle", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(createVehiclePayload), apisData.getDefaultHeaders()));
     }
 
-    public ApisData createCalculateBillingInformationForBooking(ApisData apisData) {
-
-        List<String> re = ejarCommonRepository.getVehicleInfoFormDB(apisData.getVehicleCreate().getVehicleDtos().get(0).getVehicleLicenseInfo().getPlateNo(), "147");
-        BookingCalculateBillingInformation bookingCalculateBillingInformation = new CalculateBillingInfo().getCreateBookingCalculateBillingInformationF(apisData, re);
-        apisData.setBookingCalculateBillingInformation(bookingCalculateBillingInformation);
-        apisData.getDefaultHeaders().remove("Content-Length");
-        apisData.setCalculateBillingInformationResponse((CalculateBillingInformationResponse) requestApiService.requestPostByJava(CalculateBillingInformationResponse.class,bookingCalculateBillingInformation,apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(bookingCalculateBillingInformation),apisData.getDefaultHeaders()),"api.create.vehicle"));
-//        apisData.setCalculateBillingInformationResponse((CalculateBillingInformationResponse) requestApiService.requestPostAPI1("api.create.vehicle", apisData.buildHttpEntity(bookingCalculateBillingInformation, apisData.getDefaultHeaders()), CalculateBillingInformationResponse.class).getBody());
-//        apisData.setCalculateBillingInformationResponse((CalculateBillingInformationResponse) requestApiService.requestPostAPI("api.create.vehicle", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(bookingCalculateBillingInformation), apisData.getDefaultHeaders()), CalculateBillingInformationResponse.class).getBody());
-        return apisData;
-    }
+//    public ApisData createCalculateBillingInformationForBooking(ApisData apisData) {
+//
+//        List<String> re = ejarCommonRepository.getVehicleInfoFormDB(apisData.getVehicleCreate().getVehicleDtos().get(0).getVehicleLicenseInfo().getPlateNo(), "147");
+//        BookingCalculateBillingInformation bookingCalculateBillingInformation = new CalculateBillingInfo().getCreateBookingCalculateBillingInformationF(apisData, re);
+//        apisData.setBookingCalculateBillingInformation(bookingCalculateBillingInformation);
+//        apisData.getDefaultHeaders().remove("Content-Length");
+//        apisData.setCalculateBillingInformationResponse((CalculateBillingInformationResponse) requestApiService.requestPostByJava(CalculateBillingInformationResponse.class,bookingCalculateBillingInformation,apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(bookingCalculateBillingInformation),apisData.getDefaultHeaders()),"api.create.vehicle"));
+////        apisData.setCalculateBillingInformationResponse((CalculateBillingInformationResponse) requestApiService.requestPostAPI1("api.create.vehicle", apisData.buildHttpEntity(bookingCalculateBillingInformation, apisData.getDefaultHeaders()), CalculateBillingInformationResponse.class).getBody());
+////        apisData.setCalculateBillingInformationResponse((CalculateBillingInformationResponse) requestApiService.requestPostAPI("api.create.vehicle", apisData.buildHttpEntity(JsonUtility.getJsonStringFromObjectNode(bookingCalculateBillingInformation), apisData.getDefaultHeaders()), CalculateBillingInformationResponse.class).getBody());
+//        return apisData;
+//    }
 
     public ResponseEntity<String> ReceiveNewVehicle(ApisData apisData) {
         ReceiveVehicle receiveNewVehicleInfo = new ReceiveNewVehicleInfo().getReceiveNewVehicleInfo(apisData);
