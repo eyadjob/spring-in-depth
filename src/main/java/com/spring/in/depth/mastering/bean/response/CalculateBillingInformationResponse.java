@@ -22,7 +22,9 @@ public class CalculateBillingInformationResponse {
     @JsonProperty("__abp")
     public Boolean abp;
 
-    public class Result {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Data
+    public static class Result {
 
         @JsonProperty("calculationResult")
         public CalculationResult calculationResult;
@@ -41,13 +43,17 @@ public class CalculateBillingInformationResponse {
         @JsonProperty("refundDetails")
         public Object refundDetails;
 
-        public class DeferredDisbursementInfo {
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @Data
+        public static class DeferredDisbursementInfo {
 
             @JsonProperty("amount")
             public Object amount;
 
         }
-        public class CalculationResult {
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @Data
+        public static class CalculationResult {
 
             @JsonProperty("netAmount")
             public Double netAmount;
@@ -64,7 +70,9 @@ public class CalculateBillingInformationResponse {
             @JsonProperty("calculationItems")
             public List<CalculationItem> calculationItems = null;
 
-            public class CalculationItem {
+            @JsonInclude(JsonInclude.Include.NON_NULL)
+            @Data
+            public static class CalculationItem {
 
                 @JsonProperty("itemTypeId")
                 public Integer itemTypeId;
@@ -111,7 +119,9 @@ public class CalculateBillingInformationResponse {
                 @JsonProperty("taxConfigurations")
                 public String taxConfigurations;
 
-                public class Duration {
+                @JsonInclude(JsonInclude.Include.NON_NULL)
+                @Data
+                public static class Duration {
 
                     @JsonProperty("start")
                     public String start;
@@ -122,7 +132,9 @@ public class CalculateBillingInformationResponse {
 
                 }
 
-                public class DiscountDescription {
+                @JsonInclude(JsonInclude.Include.NON_NULL)
+                @Data
+                public static class DiscountDescription {
 
                     @JsonProperty("type")
                     public String type;
@@ -133,7 +145,9 @@ public class CalculateBillingInformationResponse {
 
                 }
 
-                public class ItemNameLocalized {
+                @JsonInclude(JsonInclude.Include.NON_NULL)
+                @Data
+                public static class ItemNameLocalized {
 
                     @JsonProperty("stringValue")
                     public String stringValue;
@@ -144,7 +158,9 @@ public class CalculateBillingInformationResponse {
             }
         }
 
-        public class VoucherBasicInfo {
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @Data
+        public static class VoucherBasicInfo {
 
             @JsonProperty("typeName")
             public String typeName;
@@ -153,7 +169,9 @@ public class CalculateBillingInformationResponse {
 
         }
 
-        public class PaymentInfo {
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        @Data
+        public static class PaymentInfo {
 
             @JsonProperty("paidAmount")
             public Double paidAmount;
@@ -181,10 +199,6 @@ public class CalculateBillingInformationResponse {
             public Double voucherAmount;
             @JsonProperty("nonDeferredAmount")
             public Object nonDeferredAmount;
-
         }
-
     }
-
-
 }

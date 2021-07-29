@@ -1,10 +1,12 @@
 package com.spring.in.depth.mastering.service;
 
-import com.spring.in.depth.mastering.bean.BranchesInfo;
 import com.spring.in.depth.mastering.bean.FuelTypes;
 import com.spring.in.depth.mastering.bean.InsuranceCompanies;
 import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
 import com.spring.in.depth.mastering.bean.response.BranchesComboBoxResponse;
+import com.spring.in.depth.mastering.bean.response.CreateBookingDateInputsResponse;
+import com.spring.in.depth.mastering.bean.response.GetAllBranchVehicles;
+import com.spring.in.depth.mastering.bean.response.VehicleCheckPreparationDataResponse;
 import com.spring.in.depth.mastering.entity.ejar.stg.EjarCountryEntity;
 import com.spring.in.depth.mastering.repository.ejar.stg.EjarCountryRepository;
 import lombok.Data;
@@ -72,18 +74,14 @@ public class AllGetApiServices {
         return apisData;
     }
 
-    public ApisData getBranches(ApisData apisData) {
-        apisData.setBranchesComboBoxResponse((BranchesComboBoxResponse) requestApiService.requestExchangeAPI(BranchesComboBoxResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + countryId, "includeInActive=" + params[0], "includeAll=" + params[1], "filterTypes=" + params[2], "filterTypes=" + params[3]).getBody());
-        apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchName(branchName);
-        apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchId(apisData.getBranchesComboBoxResponse().getResult().getItems().stream().filter(b -> b.getDisplayText().contains(branchName)).findFirst().get().getValue().toString());
+    public ApisData getBranches(ApisData apisData,String branchName, String... params) {
+        apisData.setBranchesComboBoxResponse((BranchesComboBoxResponse) requestApiService.requestExchangeAPI(BranchesInfo.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + params[0], "includeInActive=" + params[1], "includeAll=" + params[2], "filterTypes=" + params[3], "filterTypes=" + params[4]).getBody());
+        apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchId();
         return apisData;
     }
-
-    public ApisData getVehiclePreprationData(ApisData apisData, boolean includeActive) {
-        InsuranceCompanies insuranceCompanies = (InsuranceCompanies) requestApiService.requestExchangeAPI(InsuranceCompanies.class, apisData.buildHttpEntity(), "api.GetBranches", "countryId=" + apisData.getCountryInfo().getCountryId(), "includeActive=" + includeActive).getBody();
-        apisData.getVehicleInfo().setInsuranceCompanies(insuranceCompanies);
+    public ApisData getCreateBookingDateInputs(ApisData apisData) {
+        apisData.setCreateBookingDateInputsResponse((CreateBookingDateInputsResponse) requestApiService.requestExchangeAPI(CreateBookingDateInputsResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetCreateBookingDateInputs", "countryId=" + apisData.getCountryInfo().getCountryId()).getBody());
         return apisData;
     }
-
 
 }

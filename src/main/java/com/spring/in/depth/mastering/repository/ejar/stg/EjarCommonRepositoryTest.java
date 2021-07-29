@@ -6,25 +6,52 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class EjarCommonRepository {
+public class EjarCommonRepositoryTest {
 
-    @Autowired
-    @Qualifier("EjarStgDataSource")
-    private DataSource ejarDataSource;
+
+    public static void main(String[] args) {
+        EjarCommonRepositoryTest test = new EjarCommonRepositoryTest();
+        test.getVehicleInfoFormDB("i k d 1015","147");
+    }
+
+
+    private String getConnectionUrl() {
+
+        return "jdbc:sqlserver://172.16.30.177;databaseName=eJarDbStaging";
+
+    }
+
+
+    private java.sql.Connection getConnection() {
+        Connection con = null;
+        try {
+
+            DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+            System.out.println(getConnectionUrl());
+
+            con = java.sql.DriverManager.getConnection(getConnectionUrl(), "ejar", "Wefaq@#1234");
+            if (con != null) {
+                System.out.println("Connection Successful!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error Trace in getConnection() : " + e.getMessage());
+        }
+        return con;
+    }
 
     public ResultSet executeQuery(String query) {
         ResultSet resultSet = null;
         try {
-            Statement stmtSQL = ejarDataSource.getConnection().createStatement();
+            Statement stmtSQL = getConnection().createStatement();
             resultSet = stmtSQL.executeQuery(query);
+            resultSet.next();
+            System.out.println(resultSet.getString("vehicleId"));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -36,11 +63,15 @@ public class EjarCommonRepository {
         ResultSet resultSet = executeQuery(query);
         List<String> result = new ArrayList<String>();
         try {
+
             while (resultSet.next()) {
+
                 StringBuilder columnQuery = new StringBuilder();
                 for (String s : columns) {
                     columnQuery.append(resultSet.getString(s) + ";");
+
                 }
+
                 result.add(columnQuery.toString());
             }
             return result;
@@ -68,6 +99,6 @@ public class EjarCommonRepository {
                 "ON carModel.ModelId = rv.ModelId\n" +
                 "WHERE rv.plateNo LIKE '" + plateNumber + "'  AND rv.statusId='" + statusId + "' ORDER BY rr.Id DESC\n" +
                 "\n";
-        return getRecordsFromDB(query,"vehicleId",  "modelId",  "year", "trimLevelId", "branchId", "plateNumber",  "rentalRateId",  "categoryId" );
+        return getRecordsFromDB(query,"vehicleId",  "modelId",  "year", "trimLevelId", "branchId", "plateNumber",  "rentalRateId", "categoryId" );
     }
 }
