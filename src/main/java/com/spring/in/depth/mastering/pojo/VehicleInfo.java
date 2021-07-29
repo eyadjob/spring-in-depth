@@ -83,7 +83,8 @@ public class VehicleInfo {
         VehicleCreate vehicleCreatePayload = new VehicleCreate();
         vehicleCreatePayload.getVehicleDtos().get(0).setOdometer("22");
         vehicleCreatePayload.getVehicleDtos().get(0).setFuelId(208);
-        vehicleCreatePayload.getVehicleDtos().get(0).setBranchId(apisData.getCountryInfo().getSelectedBranch());
+        vehicleCreatePayload.getVehicleDtos().get(0).setBranchId(apisData.getBranchesComboBoxResponse().getSelectedBranch().getBranchId());
+        vehicleCreatePayload.getVehicleDtos().get(0).getLocationInfo().setCurrentLocationId(apisData.getBranchesComboBoxResponse().getSelectedBranch().getBranchId());
         vehicleCreatePayload.getVehicleDtos().get(0).getVehicleManufacturingInfo().setModelId("107");
         vehicleCreatePayload.getVehicleDtos().get(0).getVehicleManufacturingInfo().setYear(2021);
         vehicleCreatePayload.getVehicleDtos().get(0).getVehicleManufacturingInfo().setChassisNo(chassisNumber);

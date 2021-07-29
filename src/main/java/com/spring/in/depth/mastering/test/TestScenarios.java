@@ -35,15 +35,17 @@ public class TestScenarios {
         postApiService.authenticateUser(apisData, "admin", "ejarAdmin", "123456");
         getApiServices.fillInitialData(apisData, countryName, branchName);
         getApiServices.fillVehicleData(apisData);
-        getApiServices.getBranches(apisData, String.valueOf(apisData.getCountryInfo().getCountryId()), String.valueOf(false), String.valueOf(false), String.valueOf(8900), String.valueOf(8902));
+        getApiServices.getBranches(apisData, String.valueOf(apisData.getCountryInfo().getCountryId()),branchName, String.valueOf(false), String.valueOf(false), String.valueOf(8900), String.valueOf(8902));
         ResponseEntity<String> response = postApiService.createNewCustomer(apisData);
         ResponseEntity<String> vehicleResponse =  postApiService.createNewVehicle(apisData);
+        ResponseEntity<String> vehiclePreprationResponse =  getApiServices.getVehiclePreprationData(apisData);
+        System.out.println(vehicleResponse);
         System.out.println(apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData));
         String customerPayload = apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData).toString();
 
-        ReportManager reportManager = new ReportManager("\\Ejar APIs Regression Report.html");
-        reportManager.fillStep("Create New Customer",countryName,customerPayload,response.getBody());
-        reportManager.getReport().flush();
+//        ReportManager reportManager = new ReportManager("\\Ejar APIs Regression Report.html");
+//        reportManager.fillStep("Create New Customer",countryName,customerPayload,response.getBody());
+//        reportManager.getReport().flush();
 
     }
 }

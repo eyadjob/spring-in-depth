@@ -44,6 +44,11 @@ public class RequestApiService {
         return new RestTemplate().exchange( uri, HttpMethod.GET, httpEntity, className);
     }
 
+    public ResponseEntity<String> requestExchangeAPIAndReturnJsonString(Class className, HttpEntity<String> httpEntity, String apiNameKey, String... queryParams) {
+        String uri = buildGetUri(PropManager.getInstance().getProperty("env.url") + PropManager.getInstance().getProperty(apiNameKey), queryParams);
+        return new RestTemplate().exchange( uri, HttpMethod.GET, httpEntity, className);
+    }
+
 
     public String buildGetUri(String url, String... params) {
         StringBuilder getUri = new StringBuilder(url);
