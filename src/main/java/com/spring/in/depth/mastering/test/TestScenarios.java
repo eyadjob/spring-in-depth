@@ -37,13 +37,17 @@ public class TestScenarios {
         postApiService.createNewVehicle(apisData);
         System.out.println(apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData));
         System.out.println(apisData.getVehicleInfo().getCreateVehiclePayloadWithPogo(apisData));
+        System.out.println(apisData.getVehicleInfo().getCreateVehiclePayloadWithPogo(apisData));
 
         getApiServices.getVehiclePreparationData(apisData);
-//        postApiService.uploadFile(apisData,"signature");
+        System.out.println(apisData.getVehicleCheckPreparationDataResponse().toString());
+        postApiService.uploadFile(apisData,"signature");
+        postApiService.ReceiveNewVehicle(apisData);
+        System.out.println(apisData.getReceiveVehicle().toString());
 //        postApiService.uploadFile(apisData,"first car image");
 //        postApiService.uploadFile(apisData,"secondCarImage");
 //        System.out.println(apisData.getVehicleInfo().getCreateVehiclePayloadWithPogo(apisData));
-//        postApiService.ReceiveNewVehicle(apisData);
+
 //        getApiServices.getCreateBookingDateInputs(apisData);
 //        postApiService.createCalculateBillingInformationForBooking(apisData);
 //        System.out.println(apisData.getCalculateBillingInformationResponse());

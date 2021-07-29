@@ -1,6 +1,5 @@
 package com.spring.in.depth.mastering.pojo;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.spring.in.depth.mastering.bean.receivevehicle.ReceiveVehicle;
 import com.spring.in.depth.mastering.bean.response.VehicleCheckPreparationDataResponse;
 import com.spring.in.depth.mastering.service.ApisData;
@@ -15,12 +14,15 @@ public class ReceiveNewVehicleInfo {
         receiveVehicle.setVehicleId(apisData.getVehicleInfo().getId());
         receiveVehicle.setFuelId(apisData.getVehicleInfo().getFuelId());
         receiveVehicle.setOdometer(22);
+        receiveVehicle.setSignature(new ReceiveVehicle.Signature());
         receiveVehicle.getSignature().setUrl(apisData.getUploadFileResponse().get(0).getResult().getVirtualPath());
+        receiveVehicle.setReferenceDetails(new ReceiveVehicle.ReferenceDetails());
         receiveVehicle.getReferenceDetails().setCheckTypeId(6);
-        receiveVehicle.getSkeletonDetails().setSkeletonId(apisData.getVehicleCheckPreparationDataResponse().getResult().getVehicleSkeletonDetails().getId());
-        receiveVehicle.getSkeletonDetails().getImage().setUrl(apisData.getVehicleCheckPreparationDataResponse().getResult().getVehicleSkeletonDetails().getImage().getUrl());
-        receiveVehicle.getSkeletonDetails().getImage().setId(apisData.getVehicleCheckPreparationDataResponse().getResult().getVehicleSkeletonDetails().getImage().getId());
-        receiveVehicle.getSkeletonDetails().getImage().setIsNewDocument(false);
+        receiveVehicle.setSkeletonDetails(new ReceiveVehicle.SkeletonDetails());
+        receiveVehicle.getSkeletonDetails().setSkeletonImage(new ReceiveVehicle.SkeletonDetails.SkeletonImage());
+        receiveVehicle.getSkeletonDetails().getSkeletonImage().setUrl(apisData.getVehicleCheckPreparationDataResponse().getResult().getVehicleSkeletonDetails().getImage().getUrl());
+        receiveVehicle.getSkeletonDetails().getSkeletonImage().setId(apisData.getVehicleCheckPreparationDataResponse().getResult().getVehicleSkeletonDetails().getImage().getId());
+        receiveVehicle.getSkeletonDetails().getSkeletonImage().setIsNewDocument(false);
         fillImagesForSnapShots(receiveVehicle, apisData);
         setVehicleCheckDamages(receiveVehicle,apisData);
         return receiveVehicle;

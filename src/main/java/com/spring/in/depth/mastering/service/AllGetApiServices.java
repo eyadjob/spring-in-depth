@@ -76,8 +76,8 @@ public class AllGetApiServices {
     }
 
     public ApisData getBranches(ApisData apisData,String countryId, String branchName, String... params) {
-        apisData.setBranchesComboBoxResponse((BranchesComboBoxResponse) requestApiService.requestExchangeAPI(BranchesComboBoxResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + countryId, "includeInActive=" + params[0], "includeAll=" + params[2], "filterTypes=" + params[3], "filterTypes=" + params[3]).getBody());
-        apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchId(apisData.getBranchesComboBoxResponse().getResult().getItems().stream().filter(b -> b.getDisplayText().contains(branchName)).findFirst().get().toString());
+        apisData.setBranchesComboBoxResponse((BranchesComboBoxResponse) requestApiService.requestExchangeAPI(BranchesComboBoxResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + countryId, "includeInActive=" + params[0]).getBody());
+        apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchId(apisData.getBranchesComboBoxResponse().getResult().getItems().stream().filter(b -> b.getDisplayText().contains(branchName)).findFirst().get().getValue());
         apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchName(branchName);
         return apisData;
     }
@@ -88,7 +88,7 @@ public class AllGetApiServices {
     }
 
     public ApisData getVehiclePreparationData(ApisData apisData) {
-        apisData.setVehicleCheckPreparationDataResponse((VehicleCheckPreparationDataResponse) requestApiService.requestExchangeAPI(VehicleCheckPreparationDataResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "VehicleId=" + apisData.getVehicleInfo().getId() + "CheckTypeId=6").getBody());
+        apisData.setVehicleCheckPreparationDataResponse((VehicleCheckPreparationDataResponse) requestApiService.requestExchangeAPI(VehicleCheckPreparationDataResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetVehicleCheckPreparationData", "VehicleId=" + apisData.getVehicleInfo().getId() , "CheckTypeId=6").getBody());
         return apisData;
     }
 

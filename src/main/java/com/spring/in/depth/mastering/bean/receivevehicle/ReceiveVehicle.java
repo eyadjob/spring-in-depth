@@ -35,6 +35,8 @@ public class ReceiveVehicle {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class VehicleCheckDamages {
 
         @JsonProperty("checkItemStatuses")
@@ -62,6 +64,8 @@ public class ReceiveVehicle {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class TotalDamagesCost {
 
         @JsonProperty("value")
@@ -110,6 +114,8 @@ public class ReceiveVehicle {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class ReferenceDetails {
 
         @JsonProperty("checkTypeId")
@@ -119,6 +125,8 @@ public class ReceiveVehicle {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Signature {
 
         @JsonProperty("url")
@@ -128,15 +136,19 @@ public class ReceiveVehicle {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class SkeletonDetails {
 
         @JsonProperty("skeletonId")
         public Integer skeletonId;
         @JsonProperty("skeletonImage")
-        public SkeletonImage image;
+        public SkeletonImage skeletonImage;
 
         @JsonInclude(JsonInclude.Include.NON_NULL)
         @Data
+        @AllArgsConstructor
+        @NoArgsConstructor
         public static class SkeletonImage {
 
             @JsonProperty("id")
