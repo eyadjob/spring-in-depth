@@ -27,7 +27,9 @@ public class ApisData {
     private CreateCustomerResponse createCustomerResponse;
     private AuthenticationInfo authenticationInfo;
     private BranchesComboBoxResponse branchesComboBoxResponse;
+    private BranchLocations branchLocations;
     private String selectedBranchId;
+    private String getSelectedBranchLocation;
     private String selectedBranchName;
     private VehicleCreate vehicleCreate;
     private VehicleCheckPreparationDataResponse vehicleCheckPreparationDataResponse;

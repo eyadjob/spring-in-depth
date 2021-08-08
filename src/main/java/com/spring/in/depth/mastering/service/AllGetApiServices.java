@@ -4,10 +4,7 @@ import com.spring.in.depth.mastering.bean.BranchesInfo;
 import com.spring.in.depth.mastering.bean.FuelTypes;
 import com.spring.in.depth.mastering.bean.InsuranceCompanies;
 import com.spring.in.depth.mastering.bean.countryinfo.CurrnecyInfo;
-import com.spring.in.depth.mastering.bean.response.BranchesComboBoxResponse;
-import com.spring.in.depth.mastering.bean.response.CreateBookingDateInputsResponse;
-import com.spring.in.depth.mastering.bean.response.GetAllBranchVehicles;
-import com.spring.in.depth.mastering.bean.response.VehicleCheckPreparationDataResponse;
+import com.spring.in.depth.mastering.bean.response.*;
 import com.spring.in.depth.mastering.entity.ejar.stg.EjarCountryEntity;
 import com.spring.in.depth.mastering.repository.ejar.stg.EjarCountryRepository;
 import lombok.Data;
@@ -79,6 +76,7 @@ public class AllGetApiServices {
         apisData.setBranchesComboBoxResponse((BranchesComboBoxResponse) requestApiService.requestExchangeAPI(BranchesComboBoxResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranches", "countryId=" + countryId, "includeInActive=" + params[0]).getBody());
         apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchId(apisData.getBranchesComboBoxResponse().getResult().getItems().stream().filter(b -> b.getDisplayText().contains(branchName)).findFirst().get().getValue());
         apisData.getBranchesComboBoxResponse().getSelectedBranch().setBranchName(branchName);
+
         return apisData;
     }
 
@@ -91,5 +89,18 @@ public class AllGetApiServices {
         apisData.setVehicleCheckPreparationDataResponse((VehicleCheckPreparationDataResponse) requestApiService.requestExchangeAPI(VehicleCheckPreparationDataResponse.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetVehicleCheckPreparationData", "VehicleId=" + apisData.getVehicleInfo().getId() , "CheckTypeId=6").getBody());
         return apisData;
     }
+
+    public ApisData getBranchVehicleForPlateNumber(ApisData apisData) {
+        apisData.setGetAllBranchVehicles((GetAllBranchVehicles) requestApiService.requestExchangeAPI(GetAllBranchVehicles.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetAllBranchVehicles", apisData.getVehicleInfo().getDataInAngularEncoding(String.valueOf(apisData.getCountryInfo().getCountryId()), apisData.getBranchesComboBoxResponse().getSelectedBranch().getBranchId(), String.valueOf(apisData.getBranchesComboBoxResponse().getSelectedBranch().getSelectedLocation()),"140")).getBody());
+
+        return apisData;
+    }
+
+    public ApisData getBranchLocations(ApisData apisData) {
+        apisData.setBranchLocations((BranchLocations) requestApiService.requestExchangeAPI(BranchLocations.class, apisData.buildHttpEntity(apisData.getDefaultHeaders()), "api.GetBranchForEdit", "id=" +apisData.getBranchesComboBoxResponse().getSelectedBranch().getBranchId()).getBody());
+        apisData.getBranchesComboBoxResponse().getSelectedBranch().setSelectedLocation(apisData.getBranchLocations().result.getLocations().stream().findFirst().get().getId());
+        return apisData;
+    }
+
 
 }
