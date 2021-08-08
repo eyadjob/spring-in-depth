@@ -54,6 +54,17 @@ public class VehicleInfo {
         return angularPlateNumber;
     }
 
+    public String getPlateNumberForAngular(String plateNumber) {
+        StringBuilder pnk = new StringBuilder(plateNumber);
+        angularPlateNumber=  pnk.insert(0, "%27").append("%27").toString().replaceAll(" ", "%2520");
+        return angularPlateNumber;
+    }
+
+    public String getDataInAngularEncoding(String... params) {
+       String angularEncodedUrl =  "Request=page%3D1%26pageSize%3D15%26sort%3DlastModificationTime-desc%26filter%3D(countryId~eq~"+params[0]+"~and~(currentLocationId~eq~"+params[1]+"~or~currentLocationId~eq~"+params[2]+")~and~statusId~eq~"+params[3]+"~and~plateNo~contains~"+getPlateNumberForAngular()+")";
+       return angularEncodedUrl;
+    }
+
     public VehicleCreate getCreateVehiclePayloadWithPogo(ApisData apisData) {
         VehicleCreate vehicleCreatePayload = new VehicleCreate();
         vehicleCreatePayload.getVehicleDtos().get(0).setOdometer("22");

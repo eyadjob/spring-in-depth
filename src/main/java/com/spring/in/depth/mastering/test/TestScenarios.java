@@ -3,14 +3,10 @@ package com.spring.in.depth.mastering.test;
 
 import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
 
-import com.spring.in.depth.mastering.bean.vehicle.VehicleCreate;
-import com.spring.in.depth.mastering.report.ready.ReportManager;
 import com.spring.in.depth.mastering.service.AllGetApiServices;
 import com.spring.in.depth.mastering.service.AllPostApiService;
 import com.spring.in.depth.mastering.service.ApisData;
-import com.spring.in.depth.mastering.utility.JsonUtility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -35,6 +31,9 @@ public class TestScenarios {
         getApiServices.getBranches(apisData, String.valueOf(apisData.getCountryInfo().getCountryId()),branchName, String.valueOf(false), String.valueOf(false), String.valueOf(8900), String.valueOf(8902));
         postApiService.createNewCustomer(apisData);
         postApiService.createNewVehicle(apisData);
+        getApiServices.getBranchVehicleForPlateNumber(apisData);
+        getApiServices.getBranchLocations(apisData);
+
         System.out.println(apisData.getCustomerInfo().getCreateCustomerReadyPayload(apisData));
         System.out.println(apisData.getVehicleInfo().getCreateVehiclePayloadWithPogo(apisData));
         System.out.println(apisData.getVehicleInfo().getCreateVehiclePayloadWithPogo(apisData));

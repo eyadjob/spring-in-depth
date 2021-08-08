@@ -76,12 +76,15 @@ public class BranchesComboBoxResponse {
             this.branchName = branchName;
             this.branchId = branchId;
 
+
         }
 
         @JsonIgnore
         String branchId;
         @JsonIgnore
         String branchName;
+        @JsonIgnore
+        int selectedLocation;
 
     }
 }
